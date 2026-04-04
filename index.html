@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="slides-format" content="viewport">
+    <title>Запуск Премиального Эксперта — Коммерческое предложение</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-bg: #0d0e0b;
+            --color-bg-deep: #080907;
+            --color-surface: #161810;
+            --color-text: #f5f0e8;
+            --color-text-secondary: #d4c9b0;
+            --color-text-muted: #8a8070;
+            --color-accent-1: #c9a84c;
+            --color-accent-2: #e8d5a0;
+            --color-accent-3: #8b6e2a;
+            --color-glass-bg: rgba(255,255,255,0.05);
+            --color-glass-border: rgba(201,168,76,0.18);
+            --color-vignette: rgba(0,0,0,0.5);
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Manrope', sans-serif;
+        }
+    </style>
+    <style>
+        :root {
+            --color-bg: #0d0e0b;
+            --color-text: #f5f0e8;
+            --glow-color-rgb: 201,168,76;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { background: var(--color-bg); margin: 0; }
+        body { font-family: 'Manrope', sans-serif; color: var(--color-text); overflow: hidden; height: 100vh; width: 100vw; }
+        .deck { width: 100vw; height: 100vh; position: relative; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--color-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: scale(0.95); transition: opacity 0.7s ease, transform 0.7s ease; pointer-events: none; overflow: hidden; }
+        .slide.active { opacity: 1; transform: scale(1); pointer-events: all; }
+        .slide > .content { position: relative; z-index: 2; width: 100%; max-width: 1100px; padding: clamp(1.5rem, 4vw, 3.5rem); }
+        .nav-controls { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; z-index: 100; background: rgba(201,168,76,0.08); backdrop-filter: blur(10px); padding: 8px 22px; border-radius: 40px; border: 1px solid rgba(201,168,76,0.2); }
+        .nav-btn { width: 38px; height: 38px; border: none; background: rgba(201,168,76,0.1); color: #c9a84c; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+        .nav-btn:hover { background: rgba(201,168,76,0.2); }
+        .slide-dots { display: flex; gap: 7px; }
+        .slide-dots .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(201,168,76,0.2); cursor: pointer; transition: background 0.3s, transform 0.3s; }
+        .slide-dots .dot.active { background: #c9a84c; transform: scale(1.3); }
+        .slide-counter { font-size: 0.75rem; color: #8a8070; min-width: 38px; text-align: center; font-family: 'Manrope', sans-serif; }
+        .reveal { opacity: 0; transform: translateY(20px); }
+        .text-glow { text-shadow: 0 0 20px rgba(201,168,76,0.5), 0 0 40px rgba(201,168,76,0.2); }
+        .stat-glow { text-shadow: 0 0 30px rgba(201,168,76,0.7), 0 0 60px rgba(201,168,76,0.3); }
+        @keyframes glow-pulse {
+            0%, 100% { text-shadow: 0 0 20px rgba(201,168,76,0.4), 0 0 40px rgba(201,168,76,0.15); }
+            50% { text-shadow: 0 0 35px rgba(201,168,76,0.8), 0 0 70px rgba(201,168,76,0.3); }
+        }
+        .glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+        @keyframes float-slow {
+            0% { transform: translate(0,0) scale(1); }
+            25% { transform: translate(60px,-50px) scale(1.12); }
+            50% { transform: translate(-40px,40px) scale(0.9); }
+            75% { transform: translate(50px,20px) scale(1.08); }
+            100% { transform: translate(0,0) scale(1); }
+        }
+        @keyframes float-drift {
+            0% { transform: translate(0,0) scale(1) rotate(0deg); }
+            33% { transform: translate(-50px,-60px) scale(1.15) rotate(3deg); }
+            66% { transform: translate(40px,30px) scale(0.88) rotate(-2deg); }
+            100% { transform: translate(0,0) scale(1) rotate(0deg); }
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+        .gradient-mesh { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); animation: float-slow 12s ease-in-out infinite; }
+        .blob:nth-child(2) { animation: float-drift 16s ease-in-out infinite; }
+        .blob:nth-child(3) { animation: float-slow 20s ease-in-out infinite reverse; }
+        .slide::before {
+            content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            background-repeat: repeat; background-size: 256px; opacity: 0.04; mix-blend-mode: overlay;
+        }
+        .slide::after {
+            content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 40%, var(--color-vignette) 100%);
+        }
+        .bar-fill { transition: width 0.7s ease; }
+        .funnel-arrow { clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%); }
+        .divider-line { height: 1px; background: linear-gradient(to right, transparent, #c9a84c, transparent); }
+        .gold-line { width: 60px; height: 3px; background: linear-gradient(to right, #c9a84c, #e8d5a0); border-radius: 2px; }
+        .stage-badge { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #8b6e2a); font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+        .price-tag { background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05)); border: 1px solid rgba(201,168,76,0.3); border-radius: 12px; padding: 1rem 1.5rem; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+
+<div class="deck">
+
+    <!-- SLIDE 1: TITLE -->
+    <div class="slide slide-1 active" data-slide="1">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:520px;height:520px;top:-120px;right:-100px;background:#c9a84c;opacity:0.12;"></div>
+            <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-80px;background:#8b6e2a;opacity:0.1;"></div>
+            <div class="blob" style="width:220px;height:220px;top:45%;left:18%;background:#e8d5a0;opacity:0.07;"></div>
+        </div>
+        <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+        <div class="content text-center">
+            <div style="font-size:90px;margin-bottom:1rem;animation:float 3.5s ease-in-out infinite;" class="reveal">🌿</div>
+            <div class="gold-line mx-auto mb-4 reveal"></div>
+            <h1 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:700;background:linear-gradient(135deg,#c9a84c,#e8d5a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:1.2rem;">Запуск Премиального<br>Эксперта</h1>
+            <p class="reveal" style="font-size:clamp(0.85rem,1.4vw,1.1rem);color:#8a8070;letter-spacing:0.35em;text-transform:uppercase;margin-bottom:0.5rem;">Маркетинг и продакшен «под ключ»</p>
+            <p class="reveal" style="font-size:clamp(0.75rem,1.2vw,0.95rem);color:#c9a84c;letter-spacing:0.2em;text-transform:uppercase;">Коммерческое предложение · 2026</p>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: ПРОБЛЕМА ЭКСПЕРТА -->
+    <div class="slide slide-2" data-slide="2">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:380px;height:380px;top:-80px;right:-60px;background:#c9a84c;opacity:0.08;"></div>
+            <div class="blob" style="width:250px;height:250px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.06;"></div>
+        </div>
+        <div class="content">
+            <div class="gold-line mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#f5f0e8;margin-bottom:0.4rem;">Почему у экспертов не хватает клиентов?</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;">Типичная ситуация специалиста высокого класса</p>
+            <div class="grid grid-cols-2 gap-5 reveal">
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.4rem;border-left:3px solid #c44;display:flex;gap:1rem;align-items:flex-start;">
+                    <div style="font-size:1.8rem;flex-shrink:0;">🎮‍💨</div>
+                    <div>
+                        <p style="font-weight:600;font-size:1rem;margin-bottom:0.4rem;color:#f5f0e8;">Нет времени на маркетинг</p>
+                        <p style="color:#8a8070;font-size:0.85rem;line-height:1.5;">Эксперт работает с пациентами — снимать рилсы и писать тексты просто некогда</p>
+                    </div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.4rem;border-left:3px solid #c44;display:flex;gap:1rem;align-items:flex-start;">
+                    <div style="font-size:1.8rem;flex-shrink:0;">📉</div>
+                    <div>
+                        <p style="font-weight:600;font-size:1rem;margin-bottom:0.4rem;color:#f5f0e8;">Непостоянный поток клиентов</p>
+                        <p style="color:#8a8070;font-size:0.85rem;line-height:1.5;">Клиенты приходят по сарафанному радио: то густо, то пусто — без предсказуемости</p>
+                    </div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.4rem;border-left:3px solid #c44;display:flex;gap:1rem;align-items:flex-start;">
+                    <div style="font-size:1.8rem;flex-shrink:0;">🤷</div>
+                    <div>
+                        <p style="font-weight:600;font-size:1rem;margin-bottom:0.4rem;color:#f5f0e8;">Продажи отнимают энергию</p>
+                        <p style="color:#8a8070;font-size:0.85rem;line-height:1.5;">Каждый лид — ручная переписка, объяснения цены, согласования — бесконечный операционный стресс</p>
+                    </div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.4rem;border-left:3px solid #c44;display:flex;gap:1rem;align-items:flex-start;">
+                    <div style="font-size:1.8rem;flex-shrink:0;">🫥</div>
+                    <div>
+                        <p style="font-weight:600;font-size:1rem;margin-bottom:0.4rem;color:#f5f0e8;">Бренд не отражает уровень</p>
+                        <p style="color:#8a8070;font-size:0.85rem;line-height:1.5;">Соцсети хаотичны, визуал любительский — аудитория не понимает, что перед ней премиум-эксперт</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: НАШ ОТВЕТ — КОНВЕЙЕР -->
+    <div class="slide slide-3" data-slide="3">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:400px;height:400px;top:-90px;left:-60px;background:#c9a84c;opacity:0.09;"></div>
+            <div class="blob" style="width:280px;height:280px;bottom:-60px;right:-50px;background:#8b6e2a;opacity:0.07;"></div>
+        </div>
+        <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+        <div class="content text-center">
+            <div class="gold-line mx-auto mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:0.5rem;">Мы строим не «ведение соцсетей»</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.88rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:2.2rem;">А полноценный конвейер генерации спроса и продаж</p>
+            <div class="reveal" style="display:flex;align-items:center;gap:0;justify-content:center;flex-wrap:nowrap;">
+                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.18),rgba(201,168,76,0.06));border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
+                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">💬</div>
+                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Контент</p>
+                </div>
+                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
+                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
+                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">🔥</div>
+                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Вовлечение</p>
+                </div>
+                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
+                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
+                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">🤝</div>
+                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Доверие</p>
+                </div>
+                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
+                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
+                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">🎯</div>
+                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Лид</p>
+                </div>
+                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
+                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
+                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">🤖</div>
+                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">AI-бот</p>
+                </div>
+                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
+                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.25),rgba(201,168,76,0.1));border:1px solid rgba(201,168,76,0.5);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
+                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">💰</div>
+                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Продажа</p>
+                </div>
+            </div>
+            <div class="reveal" style="margin-top:2rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:1.2rem 2rem;display:inline-block;">
+                <p style="color:#e8d5a0;font-size:1rem;font-weight:500;">🎯 Ваша задача — <strong style="color:#c9a84c;">экспертиза и продукт</strong>. Наша — всё остальное.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: ЭТАП 1 — СТРАТЕГИЯ -->
+    <div class="slide slide-4" data-slide="4">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:360px;height:360px;top:-70px;right:-50px;background:#c9a84c;opacity:0.08;"></div>
+            <div class="blob" style="width:220px;height:220px;bottom:-40px;left:-30px;background:#8b6e2a;opacity:0.06;"></div>
+        </div>
+        <div class="content">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
+                <div class="stage-badge">1</div>
+                <div>
+                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап</div>
+                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">Стратегия и Позиционирование</h2>
+                </div>
+                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
+                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Стоимость</div>
+                    <div style="font-size:1.6rem;font-weight:700;color:#c9a84c;" class="glow-pulse">от 80 000 ₽</div>
+                    <div style="font-size:0.7rem;color:#8a8070;">разово · 2–3 недели</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">📋 Что входит</p>
+                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.8;list-style:none;padding:0;">
+                        <li>✓ Анализ рынка и целевой аудитории</li>
+                        <li>✓ Драйверы, барьеры, поведенческие паттерны ЦА</li>
+                        <li>✓ Позиционирование эксперта (уникальный угол)</li>
+                        <li>✓ Разработка 5–7 контент-углов</li>
+                        <li>✓ Проектирование воронки (7 касаний)</li>
+                        <li>✓ Карта продуктовой линейки</li>
+                    </ul>
+                </div>
+                <div class="reveal" style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:1.3rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">✨ Ваша выгода</p>
+                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.8;list-style:none;padding:0;">
+                        <li>💡 Чёткое понимание, кому и что продавать</li>
+                        <li>💡 Контент перестаёт быть «творчеством» — он работает на продажи</li>
+                        <li>💡 Не тратите деньги на хаотичный маркетинг</li>
+                        <li>💡 Воронка встроена до первого рубля бюджета</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="reveal" style="margin-top:1rem;background:rgba(201,168,76,0.05);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
+                <p style="color:#8a8070;font-size:0.82rem;">⚙️ <strong style="color:#d4c9b0;">Ресурсы этапа:</strong> COO / Strategic Lead + Funnel Analyst — 2–3 недели глубокой работы, интервью с экспертом, исследование конкурентов</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: ЭТАП 2 — ИНФРАСТРУКТУРА -->
+    <div class="slide slide-5" data-slide="5">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:350px;height:350px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;"></div>
+            <div class="blob" style="width:200px;height:200px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;"></div>
+        </div>
+        <div class="content">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
+                <div class="stage-badge">2</div>
+                <div>
+                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап</div>
+                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">Инфраструктура и Автоматизация</h2>
+                </div>
+                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
+                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Стоимость</div>
+                    <div style="font-size:1.6rem;font-weight:700;color:#c9a84c;" class="glow-pulse">от 120 000 ₽</div>
+                    <div style="font-size:0.7rem;color:#8a8070;">разово · 3–4 недели</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;text-align:center;">
+                    <div style="font-size:2rem;margin-bottom:0.5rem;">🌐</div>
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">Сайт / Лендинги</p>
+                    <p style="color:#8a8070;font-size:0.8rem;line-height:1.6;">Премиальный визуал, конверсионные страницы под каждый продукт</p>
+                </div>
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;text-align:center;">
+                    <div style="font-size:2rem;margin-bottom:0.5rem;">✈️</div>
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">Telegram-бот</p>
+                    <p style="color:#8a8070;font-size:0.8rem;line-height:1.6;">Автоматический прогрев, рассылки, точки контакта 24/7</p>
+                </div>
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;text-align:center;">
+                    <div style="font-size:2rem;margin-bottom:0.5rem;">⚙️</div>
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">CRM + Автоматизация</p>
+                    <p style="color:#8a8070;font-size:0.8rem;line-height:1.6;">amoCRM, Make / n8n — ни один лид не теряется, всё фиксируется</p>
+                </div>
+            </div>
+            <div class="reveal" style="margin-top:1.2rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:1.1rem 1.5rem;">
+                <p style="color:#e8d5a0;font-weight:600;font-size:0.9rem;margin-bottom:0.4rem;">✨ Почему это важно для вас:</p>
+                <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.6;">После запуска инфраструктуры <strong style="color:#c9a84c;">каждый пришедший лид попадает в систему автоматически</strong> — без ручных таблиц, пропущенных сообщений и забытых клиентов. CRM показывает воронку в реальном времени: вы всегда знаете, сколько клиентов «в работе».</p>
+            </div>
+            <div class="reveal" style="margin-top:0.8rem;background:rgba(255,255,255,0.03);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
+                <p style="color:#8a8070;font-size:0.82rem;">⚙️ <strong style="color:#d4c9b0;">Ресурсы этапа:</strong> Funnel / CRM Specialist + Automation Specialist + веб-разработчик</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: ЭТАП 3 — AI-БОТ ПРОДАЖ -->
+    <div class="slide slide-6" data-slide="6">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:400px;height:400px;top:-80px;right:-70px;background:#c9a84c;opacity:0.1;"></div>
+            <div class="blob" style="width:250px;height:250px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.08;"></div>
+        </div>
+        <div class="content">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
+                <div class="stage-badge">3</div>
+                <div>
+                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап</div>
+                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">AI-бот Продаж</h2>
+                </div>
+                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
+                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Стоимость</div>
+                    <div style="font-size:1.6rem;font-weight:700;color:#c9a84c;" class="glow-pulse">от 150 000 ₽</div>
+                    <div style="font-size:0.7rem;color:#8a8070;">разово · 4–5 недель</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-5">
+                <div class="reveal">
+                    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;margin-bottom:1rem;">
+                        <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">🤖 Что делает бот</p>
+                        <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.9;list-style:none;padding:0;">
+                            <li>✓ Квалифицирует входящие лиды (24/7)</li>
+                            <li>✓ Прогревает через цепочку сообщений</li>
+                            <li>✓ Отвечает на вопросы о продукте и цене</li>
+                            <li>✓ Закрывает на запись / оплату</li>
+                            <li>✓ Передаёт «горячих» клиентов в CRM</li>
+                        </ul>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.03);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
+                        <p style="color:#8a8070;font-size:0.82rem;">⚙️ <strong style="color:#d4c9b0;">Ресурсы:</strong> AI Architect + Funnel Analyst + Automation Specialist</p>
+                    </div>
+                </div>
+                <div class="reveal" style="background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.5rem;">
+                    <p style="color:#e8d5a0;font-weight:700;font-size:0.95rem;margin-bottom:1rem;">💎 Ваша выгода</p>
+                    <div style="display:flex;flex-direction:column;gap:0.8rem;">
+                        <div style="display:flex;gap:0.8rem;align-items:flex-start;">
+                            <div style="color:#c9a84c;font-size:1rem;flex-shrink:0;">◆</div>
+                            <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">Нет менеджера по продажам</strong> — экономия 60–80 тыс. ₽/мес на ФОТ</p>
+                        </div>
+                        <div style="display:flex;gap:0.8rem;align-items:flex-start;">
+                            <div style="color:#c9a84c;font-size:1rem;flex-shrink:0;">◆</div>
+                            <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">0 потерянных лидов</strong> — бот отвечает мгновенно, не болеет, не уходит в отпуск</p>
+                        </div>
+                        <div style="display:flex;gap:0.8rem;align-items:flex-start;">
+                            <div style="color:#c9a84c;font-size:1rem;flex-shrink:0;">◆</div>
+                            <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">Эксперт не участвует</strong> в операционных продажах — только в самой работе</p>
+                        </div>
+                        <div style="display:flex;gap:0.8rem;align-items:flex-start;">
+                            <div style="color:#c9a84c;font-size:1rem;flex-shrink:0;">◆</div>
+                            <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">Масштабируемость</strong> — бот обрабатывает 10 или 1000 лидов одинаково хорошо</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: ЭТАП 4 — КОНТЕНТ КОНВЕЙЕР -->
+    <div class="slide slide-7" data-slide="7">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:370px;height:370px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;"></div>
+            <div class="blob" style="width:220px;height:220px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;"></div>
+        </div>
+        <div class="content">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
+                <div class="stage-badge">4</div>
+                <div>
+                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап (ежемесячно)</div>
+                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">Контент-конвейер</h2>
+                </div>
+                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
+                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Сопровождение</div>
+                    <div style="font-size:1.6rem;font-weight:700;color:#c9a84c;" class="glow-pulse">от 180 000 ₽</div>
+                    <div style="font-size:0.7rem;color:#8a8070;">в месяц · постоянно</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">🎬 Производство</p>
+                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.9;list-style:none;padding:0;">
+                        <li>✓ Съёмка 2–3 дня в месяц</li>
+                        <li>✓ <strong style="color:#e8d5a0;">20–40 роликов</strong> (Reels / Shorts)</li>
+                        <li>✓ Сценарии с фокусом на лидогенерацию</li>
+                        <li>✓ Визуал премиального уровня</li>
+                        <li>✓ Перевод лайфстайла в экспертность</li>
+                        <li>✓ Публикации по контент-плану</li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <div style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:1.3rem;margin-bottom:0.8rem;">
+                        <p style="color:#e8d5a0;font-weight:700;font-size:0.9rem;margin-bottom:0.6rem;">👥 Наша команда</p>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
+                            <span style="color:#d4c9b0;font-size:0.82rem;">✍ Сценарист</span>
+                            <span style="color:#d4c9b0;font-size:0.82rem;">📸 Видеограф</span>
+                            <span style="color:#d4c9b0;font-size:0.82rem;">✂️ Монтажёр</span>
+                            <span style="color:#d4c9b0;font-size:0.82rem;">🎨 SMM / Дизайнер</span>
+                            <span style="color:#d4c9b0;font-size:0.82rem;">🎬 Content Producer</span>
+                            <span style="color:#d4c9b0;font-size:0.82rem;">📋 Project Manager</span>
+                        </div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.03);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
+                        <p style="color:#d4c9b0;font-size:0.85rem;"><strong style="color:#c9a84c;">Ваша роль:</strong> 2–3 дня съёмок в месяц. Всё остальное — мы.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: ЭТАП 5 — АНАЛИТИКА -->
+    <div class="slide slide-8" data-slide="8">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:350px;height:350px;top:-70px;right:-60px;background:#c9a84c;opacity:0.08;"></div>
+            <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-30px;background:#8b6e2a;opacity:0.06;"></div>
+        </div>
+        <div class="content">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
+                <div class="stage-badge">5</div>
+                <div>
+                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап (ежемесячно)</div>
+                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">Аналитика и Оптимизация</h2>
+                </div>
+                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
+                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Включено в сопровождение</div>
+                    <div style="font-size:1.1rem;font-weight:700;color:#c9a84c;">Входит в пакет</div>
+                    <div style="font-size:0.7rem;color:#8a8070;">ежемесячный отчёт</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;">
+                    <div style="font-size:1.6rem;margin-bottom:0.6rem;">📊</div>
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">KPI Контента</p>
+                    <ul style="color:#8a8070;font-size:0.82rem;line-height:1.7;list-style:none;padding:0;">
+                        <li>Объём: 20–40 роликов/мес</li>
+                        <li>Watch time / удержание</li>
+                        <li>Сохранения и вовлечённость</li>
+                        <li>Прирост подписчиков</li>
+                    </ul>
+                </div>
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;">
+                    <div style="font-size:1.6rem;margin-bottom:0.6rem;">🎯</div>
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">KPI Воронки</p>
+                    <ul style="color:#8a8070;font-size:0.82rem;line-height:1.7;list-style:none;padding:0;">
+                        <li>Конверсия в диалог с ботом</li>
+                        <li>Конверсия в заявку</li>
+                        <li>Отсутствие потерь лидов</li>
+                        <li>Стоимость лида (CPL)</li>
+                    </ul>
+                </div>
+                <div class="reveal" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:1.2rem;">
+                    <div style="font-size:1.6rem;margin-bottom:0.6rem;">📼</div>
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">Результат для вас</p>
+                    <ul style="color:#d4c9b0;font-size:0.82rem;line-height:1.7;list-style:none;padding:0;">
+                        <li>◆ Понятен ROI каждого вложения</li>
+                        <li>◆ Система улучшается ежемесячно</li>
+                        <li>◆ Решения на основе данных, а не ощущений</li>
+                        <li>◆ Предсказуемый поток клиентов</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: СВОДНАЯ ТАБЛИЦА ЭТАПОВ -->
+    <div class="slide slide-9" data-slide="9">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:400px;height:400px;top:-80px;right:-70px;background:#c9a84c;opacity:0.09;"></div>
+            <div class="blob" style="width:240px;height:240px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.07;"></div>
+        </div>
+        <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+        <div class="content">
+            <div class="gold-line mb-3 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:1.5rem;">Дорожная карта проекта</h2>
+            <div style="display:flex;flex-direction:column;gap:0.7rem;">
+                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:0.8rem 1.2rem;align-items:center;">
+                    <div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">Этап</div>
+                    <div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">Сроки</div>
+                    <div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">Формат</div>
+                    <div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">Стоимость</div>
+                </div>
+                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
+                    <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">1</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">Стратегия и позиционирование</span></div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;">2–3 недели</div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;">Разово</div>
+                    <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">от 80 000 ₽</div>
+                </div>
+                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
+                    <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">2</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">Инфраструктура и автоматизация</span></div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;">3–4 недели</div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;">Разово</div>
+                    <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">от 120 000 ₽</div>
+                </div>
+                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
+                    <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">3</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">AI-бот продаж</span></div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;">4–5 недель</div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;">Разово</div>
+                    <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">от 150 000 ₽</div>
+                </div>
+                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
+                    <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">4</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">Контент-конвейер + аналитика</span></div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;">с 1-го мес.</div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;">Ежемесячно</div>
+                    <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">от 180 000 ₽/мес</div>
+                </div>
+                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:linear-gradient(135deg,rgba(201,168,76,0.18),rgba(201,168,76,0.06));border:1px solid rgba(201,168,76,0.35);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
+                    <div style="color:#e8d5a0;font-weight:700;font-size:0.9rem;">Итог: запуск под ключ</div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;">~3 месяца</div>
+                    <div style="color:#d4c9b0;font-size:0.85rem;"></div>
+                    <div style="color:#c9a84c;font-weight:700;font-size:1.05rem;" class="glow-pulse">350 000 ₽ + 180 000 ₽/мес</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: КОМАНДА -->
+    <div class="slide slide-10" data-slide="10">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:360px;height:360px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;"></div>
+            <div class="blob" style="width:200px;height:200px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;"></div>
+        </div>
+        <div class="content">
+            <div class="gold-line mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:0.4rem;">Наша команда</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem;">11 специалистов работают на ваш результат</p>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="reveal" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:1.2rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.85rem;margin-bottom:0.8rem;text-transform:uppercase;letter-spacing:0.1em;">🎯 Ядро</p>
+                    <ul style="color:#d4c9b0;font-size:0.83rem;line-height:1.9;list-style:none;padding:0;">
+                        <li>🎯 COO / Strategic Lead</li>
+                        <li>📋 Project Manager</li>
+                        <li>🎬 Content Producer</li>
+                        <li>🔄 Funnel / CRM Specialist</li>
+                    </ul>
+                </div>
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:14px;padding:1.2rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.85rem;margin-bottom:0.8rem;text-transform:uppercase;letter-spacing:0.1em;">🎥 Контент</p>
+                    <ul style="color:#d4c9b0;font-size:0.83rem;line-height:1.9;list-style:none;padding:0;">
+                        <li>✍️ Сценарист</li>
+                        <li>📸 Видеограф</li>
+                        <li>✂️ Монтажёр</li>
+                        <li>🎨 SMM / Дизайнер</li>
+                    </ul>
+                </div>
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:14px;padding:1.2rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.85rem;margin-bottom:0.8rem;text-transform:uppercase;letter-spacing:0.1em;">🤖 Tech & Sales</p>
+                    <ul style="color:#d4c9b0;font-size:0.83rem;line-height:1.9;list-style:none;padding:0;">
+                        <li>🧠 AI Architect</li>
+                        <li>⚙️ Automation Specialist</li>
+                        <li>📈 Funnel Analyst</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="reveal" style="margin-top:1.2rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:12px;padding:1rem 1.5rem;text-align:center;">
+                <p style="color:#e8d5a0;font-size:0.9rem;">💡 Ключевая связка успеха: <strong style="color:#c9a84c;">Content Producer + AI Architect + Funnel Logic</strong> — именно она превращает контент в деньги</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 11: РЕЗУЛЬТАТЫ -->
+    <div class="slide slide-11" data-slide="11">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:420px;height:420px;top:-90px;right:-70px;background:#c9a84c;opacity:0.11;"></div>
+            <div class="blob" style="width:260px;height:260px;bottom:-60px;left:-50px;background:#8b6e2a;opacity:0.08;"></div>
+        </div>
+        <div class="content text-center">
+            <div class="gold-line mx-auto mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:0.4rem;">Что вы получаете через 3 месяца</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.8rem;">Измеримый результат, а не просто «красивые соцсети»</p>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem 0.8rem;text-align:center;">
+                    <div style="font-size:2.2rem;margin-bottom:0.5rem;">📱</div>
+                    <div style="font-size:1.6rem;font-weight:900;color:#c9a84c;margin-bottom:0.3rem;" class="stat-glow" data-count="40">0</div>
+                    <div style="font-size:0.72rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">роликов<br>в месяц</div>
+                </div>
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem 0.8rem;text-align:center;">
+                    <div style="font-size:2.2rem;margin-bottom:0.5rem;">🤖</div>
+                    <div style="font-size:1.6rem;font-weight:900;color:#c9a84c;margin-bottom:0.3rem;" class="stat-glow">24/7</div>
+                    <div style="font-size:0.72rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">продажи<br>без вас</div>
+                </div>
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem 0.8rem;text-align:center;">
+                    <div style="font-size:2.2rem;margin-bottom:0.5rem;">🎯</div>
+                    <div style="font-size:1.6rem;font-weight:900;color:#c9a84c;margin-bottom:0.3rem;" class="stat-glow">0</div>
+                    <div style="font-size:0.72rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">потерянных<br>лидов</div>
+                </div>
+                <div class="reveal" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.2rem 0.8rem;text-align:center;">
+                    <div style="font-size:2.2rem;margin-bottom:0.5rem;">👑</div>
+                    <div style="font-size:1rem;font-weight:700;color:#c9a84c;margin-bottom:0.3rem;" class="glow-pulse">Премиум</div>
+                    <div style="font-size:0.72rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">бренд<br>эксперта</div>
+                </div>
+            </div>
+            <div class="reveal" style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.2rem 2rem;">
+                <p style="color:#e8d5a0;font-size:1rem;font-weight:600;">Вы остаётесь в своей зоне силы — <strong style="color:#c9a84c;">лечите, помогаете, развиваетесь.</strong><br><span style="color:#d4c9b0;font-weight:400;font-size:0.9rem;">Маркетинг, продакшен и продажи работают без вашего участия.</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 12: СЛЕДУЮЩИЙ ШАГ / CTA -->
+    <div class="slide slide-12" data-slide="12">
+        <div class="gradient-mesh">
+            <div class="blob" style="width:500px;height:500px;top:-110px;right:-90px;background:#c9a84c;opacity:0.14;"></div>
+            <div class="blob" style="width:320px;height:320px;bottom:-70px;left:-70px;background:#8b6e2a;opacity:0.1;"></div>
+            <div class="blob" style="width:200px;height:200px;top:40%;left:20%;background:#e8d5a0;opacity:0.07;"></div>
+        </div>
+        <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+        <div class="content text-center">
+            <div class="gold-line mx-auto mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.8rem);font-weight:700;background:linear-gradient(135deg,#c9a84c,#e8d5a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem;">Готовы начать?</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.88rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:2rem;">Следующий шаг — стратегическая сессия</p>
+            <div class="grid grid-cols-3 gap-4 reveal" style="margin-bottom:1.8rem;">
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;">
+                    <div style="font-size:1.8rem;margin-bottom:0.5rem;">🔍</div>
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.3rem;">Шаг 1</p>
+                    <p style="color:#d4c9b0;font-size:0.82rem;line-height:1.5;">Стратегическая сессия — обсуждаем цели и специфику вашей ниши</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;">
+                    <div style="font-size:1.8rem;margin-bottom:0.5rem;">📝</div>
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.3rem;">Шаг 2</p>
+                    <p style="color:#d4c9b0;font-size:0.82rem;line-height:1.5;">Формируем детальный план и бюджет под ваш конкретный случай</p>
+                </div>
+                <div style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.2rem;">
+                    <div style="font-size:1.8rem;margin-bottom:0.5rem;">🚀</div>
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.3rem;">Шаг 3</p>
+                    <p style="color:#d4c9b0;font-size:0.82rem;line-height:1.5;">Стартуем. Через 3 месяца система работает и продаёт</p>
+                </div>
+            </div>
+            <div class="reveal" style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:1.2rem 2rem;display:inline-block;">
+                <p style="color:#e8d5a0;font-size:0.95rem;">Проект — <strong style="color:#c9a84c;">остеопат / нутрициолог / телесный терапевт</strong><br><span style="color:#8a8070;font-size:0.82rem;">Маркетинг и продакшен «под ключ» · 2026</span></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav-controls">
+    <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+    <div class="slide-dots" id="dots"></div>
+    <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+    <span class="slide-counter" id="counter">1 / 12</span>
+</div>
+
+<script>
+    let current = 1;
+    const total = document.querySelectorAll('.slide').length;
+    const dotsContainer = document.getElementById('dots');
+    const counter = document.getElementById('counter');
+    for (let i = 1; i <= total; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === 1 ? ' active' : '');
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+    }
+    function goToSlide(n) {
+        const prev = document.querySelector('.slide.active');
+        const next = document.querySelector(`.slide[data-slide="${n}"]`);
+        if (prev) prev.classList.remove('active');
+        if (next) { next.classList.add('active'); animateSlide(next); }
+        current = n; updateNav();
+    }
+    function changeSlide(dir) { let next = current + dir; if (next < 1) next = total; if (next > total) next = 1; goToSlide(next); }
+    function updateNav() {
+        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i + 1 === current));
+        counter.textContent = current + ' / ' + total;
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+    });
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', (e) => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1); });
+
+    function animateSlide(slide) {
+        slide.querySelectorAll('.reveal').forEach((el, i) => {
+            el.style.transition = 'none';
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.offsetHeight;
+            const delay = i * 0.08;
+            el.style.transition = `opacity 0.35s ease ${delay}s, transform 0.35s ease ${delay}s`;
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0px)';
+        });
+        animateSlideEffects(slide);
+    }
+
+    function animateSlideEffects(slide) {
+        slide.querySelectorAll('[data-count]:not(.counted)').forEach(el => {
+            el.classList.add('counted');
+            const target = parseInt(el.dataset.count);
+            const suffix = el.dataset.suffix || '', prefix = el.dataset.prefix || '';
+            let cur = 0; const step = target / 40;
+            const timer = setInterval(() => {
+                cur += step;
+                if (cur >= target) { cur = target; clearInterval(timer); }
+                el.textContent = prefix + Math.round(cur).toLocaleString() + suffix;
+            }, 30);
+        });
+        slide.querySelectorAll('.bar-fill:not(.fill-init)').forEach((bar, i) => {
+            bar.classList.add('fill-init');
+            bar.style.width = '0%';
+            bar.style.transition = `width 0.6s ease ${i * 0.1}s`;
+            bar.offsetHeight;
+            bar.style.width = bar.dataset.width + '%';
+        });
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        const spotlight = document.querySelector('.mouse-spotlight');
+        if (spotlight) {
+            spotlight.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(201,168,76,0.06), transparent 40%)`;
+        }
+    });
+
+    window.initParticles = function(canvas, options) {
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight;
+        const interactive = options.interactive !== false;
+        const count = options.count || (interactive ? 55 : 18);
+        let mx = -1000, my = -1000;
+        const particles = Array.from({ length: count }, () => ({
+            x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+            size: Math.random() * 2.2 + 0.6, alpha: Math.random() * 0.3 + 0.08
+        }));
+        if (interactive) {
+            canvas.addEventListener('mousemove', (e) => { const rect = canvas.getBoundingClientRect(); mx = e.clientX - rect.left; my = e.clientY - rect.top; });
+            canvas.addEventListener('mouseleave', () => { mx = -1000; my = -1000; });
+        }
+        (function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                if (interactive) {
+                    const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) { const force = (120 - dist) / 120 * 2; p.vx += (dx / dist) * force * 0.1; p.vy += (dy / dist) * force * 0.1; }
+                }
+                p.vx *= 0.98; p.vy *= 0.98; p.x += p.vx; p.y += p.vy;
+                if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(201,168,76,${p.alpha})`; ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        })();
+    };
+    document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { interactive: true, count: 55 }));
+    document.querySelectorAll('.particle-canvas-ambient').forEach(c => window.initParticles(c, { interactive: false, count: 18 }));
+
+    try { animateSlide(document.querySelector('.slide.active')); } catch(e) { console.warn(e); }
+</script>
+</body>
+</html>
