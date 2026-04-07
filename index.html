@@ -102,7 +102,7 @@
     <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
     <div class="slide-dots" id="dots"></div>
     <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
-    <span class="slide-counter" id="counter">1 / 12</span>
+    <span class="slide-counter" id="counter">1 / 16</span>
 </div>
 
 <script src="content.js"></script>
@@ -199,7 +199,38 @@ function renderS2(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 3 — КОНВЕЙЕР
+//  СЛАЙДЫ 3-6 — BULLETS-СЛАЙДЫ (переиспользуемый шаблон)
+// ═══════════════════════════════════════════════════════════
+function renderBulletsSlide(d, num) {
+    const cols = d.bullets.length <= 3 ? 'grid-cols-1' : 'grid-cols-2';
+    const bulletsHtml = d.bullets.map(b => `
+        <div style="display:flex;gap:0.9rem;align-items:flex-start;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:1rem;">
+            <div style="font-size:1.4rem;flex-shrink:0;">${b.icon}</div>
+            <div>
+                <p style="font-weight:600;font-size:0.88rem;margin-bottom:0.25rem;color:#e8d5a0;">${b.title}</p>
+                <p style="color:#8a8070;font-size:0.78rem;line-height:1.5;">${b.text}</p>
+            </div>
+        </div>`).join('');
+    return `
+    <div class="slide" data-slide="${num}">
+        ${mesh([
+            'width:400px;height:400px;top:-80px;right:-60px;background:#c9a84c;opacity:0.09;',
+            'width:250px;height:250px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.07;'
+        ])}
+        <div class="content">
+            <div class="gold-line mb-3 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:700;color:#f5f0e8;margin-bottom:0.3rem;">${d.title}</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.2rem;">${d.subtitle}</p>
+            <div class="grid ${cols} gap-3 reveal">${bulletsHtml}</div>
+            <div class="reveal" style="margin-top:0.8rem;background:rgba(201,168,76,0.05);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
+                <p style="color:#d4c9b0;font-size:0.8rem;line-height:1.6;">${d.conclusion}</p>
+            </div>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 4 — КОНВЕЙЕР
 // ═══════════════════════════════════════════════════════════
 function renderS3(d) {
     const lastIdx = d.steps.length - 1;
@@ -218,7 +249,7 @@ function renderS3(d) {
             </div>${arrow}`;
     }).join('');
     return `
-    <div class="slide" data-slide="3">
+    <div class="slide" data-slide="7">
         ${mesh([
             'width:400px;height:400px;top:-90px;left:-60px;background:#c9a84c;opacity:0.09;',
             'width:280px;height:280px;bottom:-60px;right:-50px;background:#8b6e2a;opacity:0.07;'
@@ -237,11 +268,11 @@ function renderS3(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 4 — СТРАТЕГИЯ
+//  СЛАЙД 5 — СТРАТЕГИЯ
 // ═══════════════════════════════════════════════════════════
 function renderS4(d) {
     return `
-    <div class="slide" data-slide="4">
+    <div class="slide" data-slide="8">
         ${mesh([
             'width:360px;height:360px;top:-70px;right:-50px;background:#c9a84c;opacity:0.08;',
             'width:220px;height:220px;bottom:-40px;left:-30px;background:#8b6e2a;opacity:0.06;'
@@ -264,7 +295,7 @@ function renderS4(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 5 — ИНФРАСТРУКТУРА
+//  СЛАЙД 6 — ИНФРАСТРУКТУРА
 // ═══════════════════════════════════════════════════════════
 function renderS5(d) {
     const cards = d.cards.map(c => `
@@ -274,7 +305,7 @@ function renderS5(d) {
             <p style="color:#8a8070;font-size:0.8rem;line-height:1.6;">${c.text}</p>
         </div>`).join('');
     return `
-    <div class="slide" data-slide="5">
+    <div class="slide" data-slide="9">
         ${mesh([
             'width:350px;height:350px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;',
             'width:200px;height:200px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;'
@@ -292,7 +323,7 @@ function renderS5(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 6 — AI-БОТ ПРОДАЖ
+//  СЛАЙД 7 — AI-БОТ ПРОДАЖ
 // ═══════════════════════════════════════════════════════════
 function renderS6(d) {
     const benefitsHtml = d.benefits.map(b => `
@@ -301,7 +332,7 @@ function renderS6(d) {
             <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">${b.title}</strong> — ${b.text}</p>
         </div>`).join('');
     return `
-    <div class="slide" data-slide="6">
+    <div class="slide" data-slide="10">
         ${mesh([
             'width:400px;height:400px;top:-80px;right:-70px;background:#c9a84c;opacity:0.1;',
             'width:250px;height:250px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.08;'
@@ -324,12 +355,12 @@ function renderS6(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 7 — КОНТЕНТ-КОНВЕЙЕР
+//  СЛАЙД 8 — КОНТЕНТ-КОНВЕЙЕР
 // ═══════════════════════════════════════════════════════════
 function renderS7(d) {
     const teamGrid = d.team.map(t => `<span style="color:#d4c9b0;font-size:0.82rem;">${t.icon} ${t.role}</span>`).join('');
     return `
-    <div class="slide" data-slide="7">
+    <div class="slide" data-slide="11">
         ${mesh([
             'width:370px;height:370px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;',
             'width:220px;height:220px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;'
@@ -354,7 +385,7 @@ function renderS7(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 8 — АНАЛИТИКА
+//  СЛАЙД 9 — АНАЛИТИКА
 // ═══════════════════════════════════════════════════════════
 function renderS8(d) {
     const kpiCards = d.kpis.map(k => {
@@ -373,7 +404,7 @@ function renderS8(d) {
         </div>`;
     }).join('');
     return `
-    <div class="slide" data-slide="8">
+    <div class="slide" data-slide="12">
         ${mesh([
             'width:350px;height:350px;top:-70px;right:-60px;background:#c9a84c;opacity:0.08;',
             'width:200px;height:200px;bottom:-40px;left:-30px;background:#8b6e2a;opacity:0.06;'
@@ -386,7 +417,7 @@ function renderS8(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 9 — ДОРОЖНАЯ КАРТА
+//  СЛАЙД 10 — ДОРОЖНАЯ КАРТА
 // ═══════════════════════════════════════════════════════════
 function renderS9(d) {
     const grid = 'grid-template-columns:2fr 1.2fr 1fr 1.5fr';
@@ -415,7 +446,7 @@ function renderS9(d) {
             <div style="color:#c9a84c;font-weight:700;font-size:1.05rem;" class="glow-pulse">${t.price}</div>
         </div>`;
     return `
-    <div class="slide" data-slide="9">
+    <div class="slide" data-slide="13">
         ${mesh([
             'width:400px;height:400px;top:-80px;right:-70px;background:#c9a84c;opacity:0.09;',
             'width:240px;height:240px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.07;'
@@ -432,7 +463,7 @@ function renderS9(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 10 — КОМАНДА
+//  СЛАЙД 11 — КОМАНДА
 // ═══════════════════════════════════════════════════════════
 function renderS10(d) {
     const groups = d.groups.map(g => {
@@ -446,7 +477,7 @@ function renderS10(d) {
         </div>`;
     }).join('');
     return `
-    <div class="slide" data-slide="10">
+    <div class="slide" data-slide="14">
         ${mesh([
             'width:360px;height:360px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;',
             'width:200px;height:200px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;'
@@ -464,7 +495,7 @@ function renderS10(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 11 — РЕЗУЛЬТАТЫ
+//  СЛАЙД 12 — РЕЗУЛЬТАТЫ
 // ═══════════════════════════════════════════════════════════
 function renderS11(d) {
     const statsHtml = d.stats.map(s => {
@@ -485,7 +516,7 @@ function renderS11(d) {
         </div>`;
     }).join('');
     return `
-    <div class="slide" data-slide="11">
+    <div class="slide" data-slide="15">
         ${mesh([
             'width:420px;height:420px;top:-90px;right:-70px;background:#c9a84c;opacity:0.11;',
             'width:260px;height:260px;bottom:-60px;left:-50px;background:#8b6e2a;opacity:0.08;'
@@ -503,7 +534,7 @@ function renderS11(d) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  СЛАЙД 12 — CTA
+//  СЛАЙД 13 — CTA
 // ═══════════════════════════════════════════════════════════
 function renderS12(d) {
     const stepsHtml = d.steps.map(s => {
@@ -518,7 +549,7 @@ function renderS12(d) {
         </div>`;
     }).join('');
     return `
-    <div class="slide" data-slide="12">
+    <div class="slide" data-slide="16">
         ${mesh([
             'width:500px;height:500px;top:-110px;right:-90px;background:#c9a84c;opacity:0.14;',
             'width:320px;height:320px;bottom:-70px;left:-70px;background:#8b6e2a;opacity:0.1;',
@@ -544,16 +575,20 @@ const C = CONTENT;
 document.getElementById('deck').innerHTML = [
     renderS1(C.s1),
     renderS2(C.s2),
-    renderS3(C.s3),
-    renderS4(C.s4),
-    renderS5(C.s5),
-    renderS6(C.s6),
-    renderS7(C.s7),
-    renderS8(C.s8),
-    renderS9(C.s9),
-    renderS10(C.s10),
-    renderS11(C.s11),
-    renderS12(C.s12)
+    renderBulletsSlide(C.s3, 3),
+    renderBulletsSlide(C.s4, 4),
+    renderBulletsSlide(C.s5, 5),
+    renderBulletsSlide(C.s6, 6),
+    renderS3(C.s7),
+    renderS4(C.s8),
+    renderS5(C.s9),
+    renderS6(C.s10),
+    renderS7(C.s11),
+    renderS8(C.s12),
+    renderS9(C.s13),
+    renderS10(C.s14),
+    renderS11(C.s15),
+    renderS12(C.s16)
 ].join('');
 
 document.title = C.meta.pageTitle;
