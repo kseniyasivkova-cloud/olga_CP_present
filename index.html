@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="slides-format" content="viewport">
-    <title>Запуск Премиального Эксперта — Коммерческое предложение</title>
+    <title id="page-title">Запуск Премиального Эксперта — Коммерческое предложение</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -96,546 +96,8 @@
 <body>
 
 <div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+<div class="deck" id="deck"></div>
 
-<div class="deck">
-
-    <!-- SLIDE 1: TITLE -->
-    <div class="slide slide-1 active" data-slide="1">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:520px;height:520px;top:-120px;right:-100px;background:#c9a84c;opacity:0.12;"></div>
-            <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-80px;background:#8b6e2a;opacity:0.1;"></div>
-            <div class="blob" style="width:220px;height:220px;top:45%;left:18%;background:#e8d5a0;opacity:0.07;"></div>
-        </div>
-        <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
-        <div class="content text-center">
-            <div style="font-size:90px;margin-bottom:1rem;animation:float 3.5s ease-in-out infinite;" class="reveal">🌿</div>
-            <div class="gold-line mx-auto mb-4 reveal"></div>
-            <h1 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:700;background:linear-gradient(135deg,#c9a84c,#e8d5a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:1.2rem;">Запуск Премиального<br>Эксперта</h1>
-            <p class="reveal" style="font-size:clamp(0.85rem,1.4vw,1.1rem);color:#8a8070;letter-spacing:0.35em;text-transform:uppercase;margin-bottom:0.5rem;">Маркетинг и продакшен «под ключ»</p>
-            <p class="reveal" style="font-size:clamp(0.75rem,1.2vw,0.95rem);color:#c9a84c;letter-spacing:0.2em;text-transform:uppercase;">Коммерческое предложение · 2026</p>
-        </div>
-    </div>
-
-    <!-- SLIDE 2: ПРОБЛЕМА ЭКСПЕРТА -->
-    <div class="slide slide-2" data-slide="2">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:380px;height:380px;top:-80px;right:-60px;background:#c9a84c;opacity:0.08;"></div>
-            <div class="blob" style="width:250px;height:250px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.06;"></div>
-        </div>
-        <div class="content">
-            <div class="gold-line mb-4 reveal"></div>
-            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#f5f0e8;margin-bottom:0.4rem;">Почему у экспертов не хватает клиентов?</h2>
-            <p class="reveal" style="color:#8a8070;font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;">Типичная ситуация специалиста высокого класса</p>
-            <div class="grid grid-cols-2 gap-5 reveal">
-                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.4rem;border-left:3px solid #c44;display:flex;gap:1rem;align-items:flex-start;">
-                    <div style="font-size:1.8rem;flex-shrink:0;">🎮‍💨</div>
-                    <div>
-                        <p style="font-weight:600;font-size:1rem;margin-bottom:0.4rem;color:#f5f0e8;">Нет времени на маркетинг</p>
-                        <p style="color:#8a8070;font-size:0.85rem;line-height:1.5;">Эксперт работает с пациентами — снимать рилсы и писать тексты просто некогда</p>
-                    </div>
-                </div>
-                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.4rem;border-left:3px solid #c44;display:flex;gap:1rem;align-items:flex-start;">
-                    <div style="font-size:1.8rem;flex-shrink:0;">📉</div>
-                    <div>
-                        <p style="font-weight:600;font-size:1rem;margin-bottom:0.4rem;color:#f5f0e8;">Непостоянный поток клиентов</p>
-                        <p style="color:#8a8070;font-size:0.85rem;line-height:1.5;">Клиенты приходят по сарафанному радио: то густо, то пусто — без предсказуемости</p>
-                    </div>
-                </div>
-                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.4rem;border-left:3px solid #c44;display:flex;gap:1rem;align-items:flex-start;">
-                    <div style="font-size:1.8rem;flex-shrink:0;">🤷</div>
-                    <div>
-                        <p style="font-weight:600;font-size:1rem;margin-bottom:0.4rem;color:#f5f0e8;">Продажи отнимают энергию</p>
-                        <p style="color:#8a8070;font-size:0.85rem;line-height:1.5;">Каждый лид — ручная переписка, объяснения цены, согласования — бесконечный операционный стресс</p>
-                    </div>
-                </div>
-                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.4rem;border-left:3px solid #c44;display:flex;gap:1rem;align-items:flex-start;">
-                    <div style="font-size:1.8rem;flex-shrink:0;">🫥</div>
-                    <div>
-                        <p style="font-weight:600;font-size:1rem;margin-bottom:0.4rem;color:#f5f0e8;">Бренд не отражает уровень</p>
-                        <p style="color:#8a8070;font-size:0.85rem;line-height:1.5;">Соцсети хаотичны, визуал любительский — аудитория не понимает, что перед ней премиум-эксперт</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 3: НАШ ОТВЕТ — КОНВЕЙЕР -->
-    <div class="slide slide-3" data-slide="3">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:400px;height:400px;top:-90px;left:-60px;background:#c9a84c;opacity:0.09;"></div>
-            <div class="blob" style="width:280px;height:280px;bottom:-60px;right:-50px;background:#8b6e2a;opacity:0.07;"></div>
-        </div>
-        <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
-        <div class="content text-center">
-            <div class="gold-line mx-auto mb-4 reveal"></div>
-            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:0.5rem;">Мы строим не «ведение соцсетей»</h2>
-            <p class="reveal" style="color:#8a8070;font-size:0.88rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:2.2rem;">А полноценный конвейер генерации спроса и продаж</p>
-            <div class="reveal" style="display:flex;align-items:center;gap:0;justify-content:center;flex-wrap:nowrap;">
-                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.18),rgba(201,168,76,0.06));border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
-                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">💬</div>
-                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Контент</p>
-                </div>
-                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
-                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
-                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">🔥</div>
-                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Вовлечение</p>
-                </div>
-                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
-                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
-                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">🤝</div>
-                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Доверие</p>
-                </div>
-                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
-                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
-                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">🎯</div>
-                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Лид</p>
-                </div>
-                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
-                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
-                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">🤖</div>
-                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">AI-бот</p>
-                </div>
-                <div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>
-                <div style="background:linear-gradient(135deg,rgba(201,168,76,0.25),rgba(201,168,76,0.1));border:1px solid rgba(201,168,76,0.5);border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
-                    <div style="font-size:1.8rem;margin-bottom:0.3rem;">💰</div>
-                    <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">Продажа</p>
-                </div>
-            </div>
-            <div class="reveal" style="margin-top:2rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:1.2rem 2rem;display:inline-block;">
-                <p style="color:#e8d5a0;font-size:1rem;font-weight:500;">🎯 Ваша задача — <strong style="color:#c9a84c;">экспертиза и продукт</strong>. Наша — всё остальное.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 4: ЭТАП 1 — СТРАТЕГИЯ -->
-    <div class="slide slide-4" data-slide="4">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:360px;height:360px;top:-70px;right:-50px;background:#c9a84c;opacity:0.08;"></div>
-            <div class="blob" style="width:220px;height:220px;bottom:-40px;left:-30px;background:#8b6e2a;opacity:0.06;"></div>
-        </div>
-        <div class="content">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
-                <div class="stage-badge">1</div>
-                <div>
-                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап</div>
-                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">Стратегия и Позиционирование</h2>
-                </div>
-                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
-                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Стоимость</div>
-                    <div style="font-size:1.6rem;font-weight:700;color:#c9a84c;" class="glow-pulse">от 80 000 ₽</div>
-                    <div style="font-size:0.7rem;color:#8a8070;">разово · 2–3 недели</div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;">
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">📋 Что входит</p>
-                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.8;list-style:none;padding:0;">
-                        <li>✓ Анализ рынка и целевой аудитории</li>
-                        <li>✓ Драйверы, барьеры, поведенческие паттерны ЦА</li>
-                        <li>✓ Позиционирование эксперта (уникальный угол)</li>
-                        <li>✓ Разработка 5–7 контент-углов</li>
-                        <li>✓ Проектирование воронки (7 касаний)</li>
-                        <li>✓ Карта продуктовой линейки</li>
-                    </ul>
-                </div>
-                <div class="reveal" style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:1.3rem;">
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">✨ Ваша выгода</p>
-                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.8;list-style:none;padding:0;">
-                        <li>💡 Чёткое понимание, кому и что продавать</li>
-                        <li>💡 Контент перестаёт быть «творчеством» — он работает на продажи</li>
-                        <li>💡 Не тратите деньги на хаотичный маркетинг</li>
-                        <li>💡 Воронка встроена до первого рубля бюджета</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="reveal" style="margin-top:1rem;background:rgba(201,168,76,0.05);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
-                <p style="color:#8a8070;font-size:0.82rem;">⚙️ <strong style="color:#d4c9b0;">Ресурсы этапа:</strong> COO / Strategic Lead + Funnel Analyst — 2–3 недели глубокой работы, интервью с экспертом, исследование конкурентов</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 5: ЭТАП 2 — ИНФРАСТРУКТУРА -->
-    <div class="slide slide-5" data-slide="5">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:350px;height:350px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;"></div>
-            <div class="blob" style="width:200px;height:200px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;"></div>
-        </div>
-        <div class="content">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
-                <div class="stage-badge">2</div>
-                <div>
-                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап</div>
-                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">Инфраструктура и Автоматизация</h2>
-                </div>
-                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
-                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Стоимость</div>
-                    <div style="font-size:1.6rem;font-weight:700;color:#c9a84c;" class="glow-pulse">от 120 000 ₽</div>
-                    <div style="font-size:0.7rem;color:#8a8070;">разово · 3–4 недели</div>
-                </div>
-            </div>
-            <div class="grid grid-cols-3 gap-4">
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;text-align:center;">
-                    <div style="font-size:2rem;margin-bottom:0.5rem;">🌐</div>
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">Сайт / Лендинги</p>
-                    <p style="color:#8a8070;font-size:0.8rem;line-height:1.6;">Премиальный визуал, конверсионные страницы под каждый продукт</p>
-                </div>
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;text-align:center;">
-                    <div style="font-size:2rem;margin-bottom:0.5rem;">✈️</div>
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">Telegram-бот</p>
-                    <p style="color:#8a8070;font-size:0.8rem;line-height:1.6;">Автоматический прогрев, рассылки, точки контакта 24/7</p>
-                </div>
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;text-align:center;">
-                    <div style="font-size:2rem;margin-bottom:0.5rem;">⚙️</div>
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">CRM + Автоматизация</p>
-                    <p style="color:#8a8070;font-size:0.8rem;line-height:1.6;">amoCRM, Make / n8n — ни один лид не теряется, всё фиксируется</p>
-                </div>
-            </div>
-            <div class="reveal" style="margin-top:1.2rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:1.1rem 1.5rem;">
-                <p style="color:#e8d5a0;font-weight:600;font-size:0.9rem;margin-bottom:0.4rem;">✨ Почему это важно для вас:</p>
-                <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.6;">После запуска инфраструктуры <strong style="color:#c9a84c;">каждый пришедший лид попадает в систему автоматически</strong> — без ручных таблиц, пропущенных сообщений и забытых клиентов. CRM показывает воронку в реальном времени: вы всегда знаете, сколько клиентов «в работе».</p>
-            </div>
-            <div class="reveal" style="margin-top:0.8rem;background:rgba(255,255,255,0.03);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
-                <p style="color:#8a8070;font-size:0.82rem;">⚙️ <strong style="color:#d4c9b0;">Ресурсы этапа:</strong> Funnel / CRM Specialist + Automation Specialist + веб-разработчик</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 6: ЭТАП 3 — AI-БОТ ПРОДАЖ -->
-    <div class="slide slide-6" data-slide="6">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:400px;height:400px;top:-80px;right:-70px;background:#c9a84c;opacity:0.1;"></div>
-            <div class="blob" style="width:250px;height:250px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.08;"></div>
-        </div>
-        <div class="content">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
-                <div class="stage-badge">3</div>
-                <div>
-                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап</div>
-                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">AI-бот Продаж</h2>
-                </div>
-                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
-                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Стоимость</div>
-                    <div style="font-size:1.6rem;font-weight:700;color:#c9a84c;" class="glow-pulse">от 150 000 ₽</div>
-                    <div style="font-size:0.7rem;color:#8a8070;">разово · 4–5 недель</div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-5">
-                <div class="reveal">
-                    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;margin-bottom:1rem;">
-                        <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">🤖 Что делает бот</p>
-                        <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.9;list-style:none;padding:0;">
-                            <li>✓ Квалифицирует входящие лиды (24/7)</li>
-                            <li>✓ Прогревает через цепочку сообщений</li>
-                            <li>✓ Отвечает на вопросы о продукте и цене</li>
-                            <li>✓ Закрывает на запись / оплату</li>
-                            <li>✓ Передаёт «горячих» клиентов в CRM</li>
-                        </ul>
-                    </div>
-                    <div style="background:rgba(255,255,255,0.03);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
-                        <p style="color:#8a8070;font-size:0.82rem;">⚙️ <strong style="color:#d4c9b0;">Ресурсы:</strong> AI Architect + Funnel Analyst + Automation Specialist</p>
-                    </div>
-                </div>
-                <div class="reveal" style="background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.5rem;">
-                    <p style="color:#e8d5a0;font-weight:700;font-size:0.95rem;margin-bottom:1rem;">💎 Ваша выгода</p>
-                    <div style="display:flex;flex-direction:column;gap:0.8rem;">
-                        <div style="display:flex;gap:0.8rem;align-items:flex-start;">
-                            <div style="color:#c9a84c;font-size:1rem;flex-shrink:0;">◆</div>
-                            <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">Нет менеджера по продажам</strong> — экономия 60–80 тыс. ₽/мес на ФОТ</p>
-                        </div>
-                        <div style="display:flex;gap:0.8rem;align-items:flex-start;">
-                            <div style="color:#c9a84c;font-size:1rem;flex-shrink:0;">◆</div>
-                            <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">0 потерянных лидов</strong> — бот отвечает мгновенно, не болеет, не уходит в отпуск</p>
-                        </div>
-                        <div style="display:flex;gap:0.8rem;align-items:flex-start;">
-                            <div style="color:#c9a84c;font-size:1rem;flex-shrink:0;">◆</div>
-                            <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">Эксперт не участвует</strong> в операционных продажах — только в самой работе</p>
-                        </div>
-                        <div style="display:flex;gap:0.8rem;align-items:flex-start;">
-                            <div style="color:#c9a84c;font-size:1rem;flex-shrink:0;">◆</div>
-                            <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">Масштабируемость</strong> — бот обрабатывает 10 или 1000 лидов одинаково хорошо</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 7: ЭТАП 4 — КОНТЕНТ КОНВЕЙЕР -->
-    <div class="slide slide-7" data-slide="7">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:370px;height:370px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;"></div>
-            <div class="blob" style="width:220px;height:220px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;"></div>
-        </div>
-        <div class="content">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
-                <div class="stage-badge">4</div>
-                <div>
-                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап (ежемесячно)</div>
-                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">Контент-конвейер</h2>
-                </div>
-                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
-                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Сопровождение</div>
-                    <div style="font-size:1.6rem;font-weight:700;color:#c9a84c;" class="glow-pulse">от 180 000 ₽</div>
-                    <div style="font-size:0.7rem;color:#8a8070;">в месяц · постоянно</div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;">
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">🎬 Производство</p>
-                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.9;list-style:none;padding:0;">
-                        <li>✓ Съёмка 2–3 дня в месяц</li>
-                        <li>✓ <strong style="color:#e8d5a0;">20–40 роликов</strong> (Reels / Shorts)</li>
-                        <li>✓ Сценарии с фокусом на лидогенерацию</li>
-                        <li>✓ Визуал премиального уровня</li>
-                        <li>✓ Перевод лайфстайла в экспертность</li>
-                        <li>✓ Публикации по контент-плану</li>
-                    </ul>
-                </div>
-                <div class="reveal">
-                    <div style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:1.3rem;margin-bottom:0.8rem;">
-                        <p style="color:#e8d5a0;font-weight:700;font-size:0.9rem;margin-bottom:0.6rem;">👥 Наша команда</p>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">
-                            <span style="color:#d4c9b0;font-size:0.82rem;">✍ Сценарист</span>
-                            <span style="color:#d4c9b0;font-size:0.82rem;">📸 Видеограф</span>
-                            <span style="color:#d4c9b0;font-size:0.82rem;">✂️ Монтажёр</span>
-                            <span style="color:#d4c9b0;font-size:0.82rem;">🎨 SMM / Дизайнер</span>
-                            <span style="color:#d4c9b0;font-size:0.82rem;">🎬 Content Producer</span>
-                            <span style="color:#d4c9b0;font-size:0.82rem;">📋 Project Manager</span>
-                        </div>
-                    </div>
-                    <div style="background:rgba(255,255,255,0.03);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
-                        <p style="color:#d4c9b0;font-size:0.85rem;"><strong style="color:#c9a84c;">Ваша роль:</strong> 2–3 дня съёмок в месяц. Всё остальное — мы.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 8: ЭТАП 5 — АНАЛИТИКА -->
-    <div class="slide slide-8" data-slide="8">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:350px;height:350px;top:-70px;right:-60px;background:#c9a84c;opacity:0.08;"></div>
-            <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-30px;background:#8b6e2a;opacity:0.06;"></div>
-        </div>
-        <div class="content">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
-                <div class="stage-badge">5</div>
-                <div>
-                    <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">Этап (ежемесячно)</div>
-                    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">Аналитика и Оптимизация</h2>
-                </div>
-                <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
-                    <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">Включено в сопровождение</div>
-                    <div style="font-size:1.1rem;font-weight:700;color:#c9a84c;">Входит в пакет</div>
-                    <div style="font-size:0.7rem;color:#8a8070;">ежемесячный отчёт</div>
-                </div>
-            </div>
-            <div class="grid grid-cols-3 gap-4">
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;">
-                    <div style="font-size:1.6rem;margin-bottom:0.6rem;">📊</div>
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">KPI Контента</p>
-                    <ul style="color:#8a8070;font-size:0.82rem;line-height:1.7;list-style:none;padding:0;">
-                        <li>Объём: 20–40 роликов/мес</li>
-                        <li>Watch time / удержание</li>
-                        <li>Сохранения и вовлечённость</li>
-                        <li>Прирост подписчиков</li>
-                    </ul>
-                </div>
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;">
-                    <div style="font-size:1.6rem;margin-bottom:0.6rem;">🎯</div>
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">KPI Воронки</p>
-                    <ul style="color:#8a8070;font-size:0.82rem;line-height:1.7;list-style:none;padding:0;">
-                        <li>Конверсия в диалог с ботом</li>
-                        <li>Конверсия в заявку</li>
-                        <li>Отсутствие потерь лидов</li>
-                        <li>Стоимость лида (CPL)</li>
-                    </ul>
-                </div>
-                <div class="reveal" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:1.2rem;">
-                    <div style="font-size:1.6rem;margin-bottom:0.6rem;">📼</div>
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">Результат для вас</p>
-                    <ul style="color:#d4c9b0;font-size:0.82rem;line-height:1.7;list-style:none;padding:0;">
-                        <li>◆ Понятен ROI каждого вложения</li>
-                        <li>◆ Система улучшается ежемесячно</li>
-                        <li>◆ Решения на основе данных, а не ощущений</li>
-                        <li>◆ Предсказуемый поток клиентов</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 9: СВОДНАЯ ТАБЛИЦА ЭТАПОВ -->
-    <div class="slide slide-9" data-slide="9">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:400px;height:400px;top:-80px;right:-70px;background:#c9a84c;opacity:0.09;"></div>
-            <div class="blob" style="width:240px;height:240px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.07;"></div>
-        </div>
-        <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
-        <div class="content">
-            <div class="gold-line mb-3 reveal"></div>
-            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:1.5rem;">Дорожная карта проекта</h2>
-            <div style="display:flex;flex-direction:column;gap:0.7rem;">
-                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:0.8rem 1.2rem;align-items:center;">
-                    <div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">Этап</div>
-                    <div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">Сроки</div>
-                    <div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">Формат</div>
-                    <div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">Стоимость</div>
-                </div>
-                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
-                    <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">1</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">Стратегия и позиционирование</span></div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;">2–3 недели</div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;">Разово</div>
-                    <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">от 80 000 ₽</div>
-                </div>
-                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
-                    <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">2</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">Инфраструктура и автоматизация</span></div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;">3–4 недели</div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;">Разово</div>
-                    <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">от 120 000 ₽</div>
-                </div>
-                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
-                    <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">3</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">AI-бот продаж</span></div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;">4–5 недель</div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;">Разово</div>
-                    <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">от 150 000 ₽</div>
-                </div>
-                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
-                    <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">4</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">Контент-конвейер + аналитика</span></div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;">с 1-го мес.</div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;">Ежемесячно</div>
-                    <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">от 180 000 ₽/мес</div>
-                </div>
-                <div class="reveal" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.5fr;gap:1rem;background:linear-gradient(135deg,rgba(201,168,76,0.18),rgba(201,168,76,0.06));border:1px solid rgba(201,168,76,0.35);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
-                    <div style="color:#e8d5a0;font-weight:700;font-size:0.9rem;">Итог: запуск под ключ</div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;">~3 месяца</div>
-                    <div style="color:#d4c9b0;font-size:0.85rem;"></div>
-                    <div style="color:#c9a84c;font-weight:700;font-size:1.05rem;" class="glow-pulse">350 000 ₽ + 180 000 ₽/мес</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 10: КОМАНДА -->
-    <div class="slide slide-10" data-slide="10">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:360px;height:360px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;"></div>
-            <div class="blob" style="width:200px;height:200px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;"></div>
-        </div>
-        <div class="content">
-            <div class="gold-line mb-4 reveal"></div>
-            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:0.4rem;">Наша команда</h2>
-            <p class="reveal" style="color:#8a8070;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem;">11 специалистов работают на ваш результат</p>
-            <div class="grid grid-cols-3 gap-4">
-                <div class="reveal" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:1.2rem;">
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.85rem;margin-bottom:0.8rem;text-transform:uppercase;letter-spacing:0.1em;">🎯 Ядро</p>
-                    <ul style="color:#d4c9b0;font-size:0.83rem;line-height:1.9;list-style:none;padding:0;">
-                        <li>🎯 COO / Strategic Lead</li>
-                        <li>📋 Project Manager</li>
-                        <li>🎬 Content Producer</li>
-                        <li>🔄 Funnel / CRM Specialist</li>
-                    </ul>
-                </div>
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:14px;padding:1.2rem;">
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.85rem;margin-bottom:0.8rem;text-transform:uppercase;letter-spacing:0.1em;">🎥 Контент</p>
-                    <ul style="color:#d4c9b0;font-size:0.83rem;line-height:1.9;list-style:none;padding:0;">
-                        <li>✍️ Сценарист</li>
-                        <li>📸 Видеограф</li>
-                        <li>✂️ Монтажёр</li>
-                        <li>🎨 SMM / Дизайнер</li>
-                    </ul>
-                </div>
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:14px;padding:1.2rem;">
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.85rem;margin-bottom:0.8rem;text-transform:uppercase;letter-spacing:0.1em;">🤖 Tech & Sales</p>
-                    <ul style="color:#d4c9b0;font-size:0.83rem;line-height:1.9;list-style:none;padding:0;">
-                        <li>🧠 AI Architect</li>
-                        <li>⚙️ Automation Specialist</li>
-                        <li>📈 Funnel Analyst</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="reveal" style="margin-top:1.2rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:12px;padding:1rem 1.5rem;text-align:center;">
-                <p style="color:#e8d5a0;font-size:0.9rem;">💡 Ключевая связка успеха: <strong style="color:#c9a84c;">Content Producer + AI Architect + Funnel Logic</strong> — именно она превращает контент в деньги</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 11: РЕЗУЛЬТАТЫ -->
-    <div class="slide slide-11" data-slide="11">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:420px;height:420px;top:-90px;right:-70px;background:#c9a84c;opacity:0.11;"></div>
-            <div class="blob" style="width:260px;height:260px;bottom:-60px;left:-50px;background:#8b6e2a;opacity:0.08;"></div>
-        </div>
-        <div class="content text-center">
-            <div class="gold-line mx-auto mb-4 reveal"></div>
-            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:0.4rem;">Что вы получаете через 3 месяца</h2>
-            <p class="reveal" style="color:#8a8070;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.8rem;">Измеримый результат, а не просто «красивые соцсети»</p>
-            <div class="grid grid-cols-4 gap-4">
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem 0.8rem;text-align:center;">
-                    <div style="font-size:2.2rem;margin-bottom:0.5rem;">📱</div>
-                    <div style="font-size:1.6rem;font-weight:900;color:#c9a84c;margin-bottom:0.3rem;" class="stat-glow" data-count="40">0</div>
-                    <div style="font-size:0.72rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">роликов<br>в месяц</div>
-                </div>
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem 0.8rem;text-align:center;">
-                    <div style="font-size:2.2rem;margin-bottom:0.5rem;">🤖</div>
-                    <div style="font-size:1.6rem;font-weight:900;color:#c9a84c;margin-bottom:0.3rem;" class="stat-glow">24/7</div>
-                    <div style="font-size:0.72rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">продажи<br>без вас</div>
-                </div>
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem 0.8rem;text-align:center;">
-                    <div style="font-size:2.2rem;margin-bottom:0.5rem;">🎯</div>
-                    <div style="font-size:1.6rem;font-weight:900;color:#c9a84c;margin-bottom:0.3rem;" class="stat-glow">0</div>
-                    <div style="font-size:0.72rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">потерянных<br>лидов</div>
-                </div>
-                <div class="reveal" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.2rem 0.8rem;text-align:center;">
-                    <div style="font-size:2.2rem;margin-bottom:0.5rem;">👑</div>
-                    <div style="font-size:1rem;font-weight:700;color:#c9a84c;margin-bottom:0.3rem;" class="glow-pulse">Премиум</div>
-                    <div style="font-size:0.72rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">бренд<br>эксперта</div>
-                </div>
-            </div>
-            <div class="reveal" style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.2rem 2rem;">
-                <p style="color:#e8d5a0;font-size:1rem;font-weight:600;">Вы остаётесь в своей зоне силы — <strong style="color:#c9a84c;">лечите, помогаете, развиваетесь.</strong><br><span style="color:#d4c9b0;font-weight:400;font-size:0.9rem;">Маркетинг, продакшен и продажи работают без вашего участия.</span></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SLIDE 12: СЛЕДУЮЩИЙ ШАГ / CTA -->
-    <div class="slide slide-12" data-slide="12">
-        <div class="gradient-mesh">
-            <div class="blob" style="width:500px;height:500px;top:-110px;right:-90px;background:#c9a84c;opacity:0.14;"></div>
-            <div class="blob" style="width:320px;height:320px;bottom:-70px;left:-70px;background:#8b6e2a;opacity:0.1;"></div>
-            <div class="blob" style="width:200px;height:200px;top:40%;left:20%;background:#e8d5a0;opacity:0.07;"></div>
-        </div>
-        <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
-        <div class="content text-center">
-            <div class="gold-line mx-auto mb-4 reveal"></div>
-            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.8rem);font-weight:700;background:linear-gradient(135deg,#c9a84c,#e8d5a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem;">Готовы начать?</h2>
-            <p class="reveal" style="color:#8a8070;font-size:0.88rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:2rem;">Следующий шаг — стратегическая сессия</p>
-            <div class="grid grid-cols-3 gap-4 reveal" style="margin-bottom:1.8rem;">
-                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;">
-                    <div style="font-size:1.8rem;margin-bottom:0.5rem;">🔍</div>
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.3rem;">Шаг 1</p>
-                    <p style="color:#d4c9b0;font-size:0.82rem;line-height:1.5;">Стратегическая сессия — обсуждаем цели и специфику вашей ниши</p>
-                </div>
-                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;">
-                    <div style="font-size:1.8rem;margin-bottom:0.5rem;">📝</div>
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.3rem;">Шаг 2</p>
-                    <p style="color:#d4c9b0;font-size:0.82rem;line-height:1.5;">Формируем детальный план и бюджет под ваш конкретный случай</p>
-                </div>
-                <div style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.2rem;">
-                    <div style="font-size:1.8rem;margin-bottom:0.5rem;">🚀</div>
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.3rem;">Шаг 3</p>
-                    <p style="color:#d4c9b0;font-size:0.82rem;line-height:1.5;">Стартуем. Через 3 месяца система работает и продаёт</p>
-                </div>
-            </div>
-            <div class="reveal" style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:1.2rem 2rem;display:inline-block;">
-                <p style="color:#e8d5a0;font-size:0.95rem;">Проект — <strong style="color:#c9a84c;">остеопат / нутрициолог / телесный терапевт</strong><br><span style="color:#8a8070;font-size:0.82rem;">Маркетинг и продакшен «под ключ» · 2026</span></p>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<!-- NAVIGATION -->
 <div class="nav-controls">
     <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
     <div class="slide-dots" id="dots"></div>
@@ -643,115 +105,573 @@
     <span class="slide-counter" id="counter">1 / 12</span>
 </div>
 
+<script src="content.js"></script>
 <script>
-    let current = 1;
-    const total = document.querySelectorAll('.slide').length;
-    const dotsContainer = document.getElementById('dots');
-    const counter = document.getElementById('counter');
-    for (let i = 1; i <= total; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'dot' + (i === 1 ? ' active' : '');
-        dot.onclick = () => goToSlide(i);
-        dotsContainer.appendChild(dot);
-    }
-    function goToSlide(n) {
-        const prev = document.querySelector('.slide.active');
-        const next = document.querySelector(`.slide[data-slide="${n}"]`);
-        if (prev) prev.classList.remove('active');
-        if (next) { next.classList.add('active'); animateSlide(next); }
-        current = n; updateNav();
-    }
-    function changeSlide(dir) { let next = current + dir; if (next < 1) next = total; if (next > total) next = 1; goToSlide(next); }
-    function updateNav() {
-        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i + 1 === current));
-        counter.textContent = current + ' / ' + total;
-    }
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
-        if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+// ═══════════════════════════════════════════════════════════
+//  ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ РЕНДЕРА
+// ═══════════════════════════════════════════════════════════
+
+function mesh(configs) {
+    return `<div class="gradient-mesh">${configs.map(c => `<div class="blob" style="${c}"></div>`).join('')}</div>`;
+}
+
+function stageHeader(d) {
+    const priceLabel  = d.priceLabel  || 'Стоимость';
+    const priceValue  = d.price       || d.priceValue || '';
+    const priceSuffix = d.priceSuffix || `${d.format} · ${d.duration}`;
+    const priceStyle  = d.price
+        ? 'font-size:1.6rem;font-weight:700;color:#c9a84c;'
+        : 'font-size:1.1rem;font-weight:700;color:#c9a84c;';
+    const priceClass  = d.price ? 'class="glow-pulse"' : '';
+    return `
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
+        <div class="stage-badge">${d.stageNum}</div>
+        <div>
+            <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">${d.stagePeriod}</div>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">${d.title}</h2>
+        </div>
+        <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
+            <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">${priceLabel}</div>
+            <div style="${priceStyle}" ${priceClass}>${priceValue}</div>
+            <div style="font-size:0.7rem;color:#8a8070;">${priceSuffix}</div>
+        </div>
+    </div>`;
+}
+
+function resources(text) {
+    return `<div class="reveal" style="margin-top:1rem;background:rgba(201,168,76,0.05);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
+        <p style="color:#8a8070;font-size:0.82rem;">⚙️ <strong style="color:#d4c9b0;">Ресурсы этапа:</strong> ${text}</p>
+    </div>`;
+}
+
+function li(items, check = '✓') {
+    return items.map(i => `<li>${check !== '' ? check + ' ' : ''}${i}</li>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 1 — ТИТУЛЬНЫЙ
+// ═══════════════════════════════════════════════════════════
+function renderS1(d) {
+    const headingHtml = d.heading.replace('\n', '<br>');
+    return `
+    <div class="slide active" data-slide="1">
+        ${mesh([
+            'width:520px;height:520px;top:-120px;right:-100px;background:#c9a84c;opacity:0.12;',
+            'width:320px;height:320px;bottom:-80px;left:-80px;background:#8b6e2a;opacity:0.1;',
+            'width:220px;height:220px;top:45%;left:18%;background:#e8d5a0;opacity:0.07;'
+        ])}
+        <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+        <div class="content text-center">
+            <div style="font-size:90px;margin-bottom:1rem;animation:float 3.5s ease-in-out infinite;" class="reveal">${d.emoji}</div>
+            <div class="gold-line mx-auto mb-4 reveal"></div>
+            <h1 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:700;background:linear-gradient(135deg,#c9a84c,#e8d5a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:1.2rem;">${headingHtml}</h1>
+            <p class="reveal" style="font-size:clamp(0.85rem,1.4vw,1.1rem);color:#8a8070;letter-spacing:0.35em;text-transform:uppercase;margin-bottom:0.5rem;">${d.subtitle}</p>
+            <p class="reveal" style="font-size:clamp(0.75rem,1.2vw,0.95rem);color:#c9a84c;letter-spacing:0.2em;text-transform:uppercase;">${d.label}</p>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 2 — ПРОБЛЕМА
+// ═══════════════════════════════════════════════════════════
+function renderS2(d) {
+    const cards = d.cards.map(c => `
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.4rem;border-left:3px solid #c44;display:flex;gap:1rem;align-items:flex-start;">
+            <div style="font-size:1.8rem;flex-shrink:0;">${c.icon}</div>
+            <div>
+                <p style="font-weight:600;font-size:1rem;margin-bottom:0.4rem;color:#f5f0e8;">${c.title}</p>
+                <p style="color:#8a8070;font-size:0.85rem;line-height:1.5;">${c.text}</p>
+            </div>
+        </div>`).join('');
+    return `
+    <div class="slide" data-slide="2">
+        ${mesh([
+            'width:380px;height:380px;top:-80px;right:-60px;background:#c9a84c;opacity:0.08;',
+            'width:250px;height:250px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.06;'
+        ])}
+        <div class="content">
+            <div class="gold-line mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#f5f0e8;margin-bottom:0.4rem;">${d.title}</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem;">${d.subtitle}</p>
+            <div class="grid grid-cols-2 gap-5 reveal">${cards}</div>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 3 — КОНВЕЙЕР
+// ═══════════════════════════════════════════════════════════
+function renderS3(d) {
+    const lastIdx = d.steps.length - 1;
+    const stepsHtml = d.steps.map((s, i) => {
+        const isLast = i === lastIdx;
+        const border = isLast
+            ? 'border:1px solid rgba(201,168,76,0.5);background:linear-gradient(135deg,rgba(201,168,76,0.25),rgba(201,168,76,0.1));'
+            : (i === 0
+                ? 'border:1px solid rgba(201,168,76,0.3);background:linear-gradient(135deg,rgba(201,168,76,0.18),rgba(201,168,76,0.06));'
+                : 'border:1px solid rgba(201,168,76,0.22);background:linear-gradient(135deg,rgba(201,168,76,0.14),rgba(201,168,76,0.04));');
+        const arrow = i < lastIdx ? `<div style="color:#c9a84c;font-size:1.4rem;padding:0 0.4rem;">→</div>` : '';
+        return `
+            <div style="${border}border-radius:12px;padding:1rem 1.2rem;text-align:center;min-width:120px;">
+                <div style="font-size:1.8rem;margin-bottom:0.3rem;">${s.icon}</div>
+                <p style="font-weight:700;font-size:0.88rem;color:#c9a84c;">${s.label}</p>
+            </div>${arrow}`;
+    }).join('');
+    return `
+    <div class="slide" data-slide="3">
+        ${mesh([
+            'width:400px;height:400px;top:-90px;left:-60px;background:#c9a84c;opacity:0.09;',
+            'width:280px;height:280px;bottom:-60px;right:-50px;background:#8b6e2a;opacity:0.07;'
+        ])}
+        <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+        <div class="content text-center">
+            <div class="gold-line mx-auto mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:0.5rem;">${d.title}</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.88rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:2.2rem;">${d.subtitle}</p>
+            <div class="reveal" style="display:flex;align-items:center;gap:0;justify-content:center;flex-wrap:nowrap;">${stepsHtml}</div>
+            <div class="reveal" style="margin-top:2rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:1.2rem 2rem;display:inline-block;">
+                <p style="color:#e8d5a0;font-size:1rem;font-weight:500;">${d.cta}</p>
+            </div>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 4 — СТРАТЕГИЯ
+// ═══════════════════════════════════════════════════════════
+function renderS4(d) {
+    return `
+    <div class="slide" data-slide="4">
+        ${mesh([
+            'width:360px;height:360px;top:-70px;right:-50px;background:#c9a84c;opacity:0.08;',
+            'width:220px;height:220px;bottom:-40px;left:-30px;background:#8b6e2a;opacity:0.06;'
+        ])}
+        <div class="content">
+            ${stageHeader(d)}
+            <div class="grid grid-cols-2 gap-4">
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">${d.includesTitle}</p>
+                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.8;list-style:none;padding:0;">${li(d.includes)}</ul>
+                </div>
+                <div class="reveal" style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:1.3rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">${d.benefitsTitle}</p>
+                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.8;list-style:none;padding:0;">${li(d.benefits, '')}</ul>
+                </div>
+            </div>
+            ${resources(d.resources)}
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 5 — ИНФРАСТРУКТУРА
+// ═══════════════════════════════════════════════════════════
+function renderS5(d) {
+    const cards = d.cards.map(c => `
+        <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.2rem;text-align:center;">
+            <div style="font-size:2rem;margin-bottom:0.5rem;">${c.icon}</div>
+            <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">${c.title}</p>
+            <p style="color:#8a8070;font-size:0.8rem;line-height:1.6;">${c.text}</p>
+        </div>`).join('');
+    return `
+    <div class="slide" data-slide="5">
+        ${mesh([
+            'width:350px;height:350px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;',
+            'width:200px;height:200px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;'
+        ])}
+        <div class="content">
+            ${stageHeader(d)}
+            <div class="grid grid-cols-3 gap-4">${cards}</div>
+            <div class="reveal" style="margin-top:1.2rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:1.1rem 1.5rem;">
+                <p style="color:#e8d5a0;font-weight:600;font-size:0.9rem;margin-bottom:0.4rem;">${d.benefitTitle}</p>
+                <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.6;">${d.benefitText}</p>
+            </div>
+            ${resources(d.resources)}
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 6 — AI-БОТ ПРОДАЖ
+// ═══════════════════════════════════════════════════════════
+function renderS6(d) {
+    const benefitsHtml = d.benefits.map(b => `
+        <div style="display:flex;gap:0.8rem;align-items:flex-start;">
+            <div style="color:#c9a84c;font-size:1rem;flex-shrink:0;">◆</div>
+            <p style="color:#d4c9b0;font-size:0.85rem;line-height:1.5;"><strong style="color:#f5f0e8;">${b.title}</strong> — ${b.text}</p>
+        </div>`).join('');
+    return `
+    <div class="slide" data-slide="6">
+        ${mesh([
+            'width:400px;height:400px;top:-80px;right:-70px;background:#c9a84c;opacity:0.1;',
+            'width:250px;height:250px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.08;'
+        ])}
+        <div class="content">
+            ${stageHeader(d)}
+            <div class="grid grid-cols-2 gap-5">
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">${d.botTitle}</p>
+                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.9;list-style:none;padding:0;">${li(d.botFeatures)}</ul>
+                </div>
+                <div class="reveal" style="background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.5rem;">
+                    <p style="color:#e8d5a0;font-weight:700;font-size:0.95rem;margin-bottom:1rem;">${d.benefitsTitle}</p>
+                    <div style="display:flex;flex-direction:column;gap:0.8rem;">${benefitsHtml}</div>
+                </div>
+            </div>
+            ${resources(d.resources)}
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 7 — КОНТЕНТ-КОНВЕЙЕР
+// ═══════════════════════════════════════════════════════════
+function renderS7(d) {
+    const teamGrid = d.team.map(t => `<span style="color:#d4c9b0;font-size:0.82rem;">${t.icon} ${t.role}</span>`).join('');
+    return `
+    <div class="slide" data-slide="7">
+        ${mesh([
+            'width:370px;height:370px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;',
+            'width:220px;height:220px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;'
+        ])}
+        <div class="content">
+            ${stageHeader(d)}
+            <div class="grid grid-cols-2 gap-4">
+                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;">
+                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">${d.productionTitle}</p>
+                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.9;list-style:none;padding:0;">${li(d.production)}</ul>
+                </div>
+                <div class="reveal" style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:1.3rem;">
+                    <p style="color:#e8d5a0;font-weight:700;font-size:0.9rem;margin-bottom:0.6rem;">${d.teamTitle}</p>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;">${teamGrid}</div>
+                </div>
+            </div>
+            <div class="reveal" style="margin-top:1rem;background:rgba(201,168,76,0.05);border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:0.8rem 1.2rem;">
+                <p style="color:#d4c9b0;font-size:0.85rem;">${d.roleText}</p>
+            </div>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 8 — АНАЛИТИКА
+// ═══════════════════════════════════════════════════════════
+function renderS8(d) {
+    const kpiCards = d.kpis.map(k => {
+        const marker = k.highlighted ? '◆' : '';
+        const bg = k.highlighted
+            ? 'background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);'
+            : 'background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);';
+        const color = k.highlighted ? '#d4c9b0' : '#8a8070';
+        return `
+        <div class="reveal" style="${bg}border-radius:14px;padding:1.2rem;">
+            <div style="font-size:1.6rem;margin-bottom:0.6rem;">${k.icon}</div>
+            <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.5rem;">${k.title}</p>
+            <ul style="color:${color};font-size:0.82rem;line-height:1.7;list-style:none;padding:0;">
+                ${k.items.map(i => `<li>${marker ? marker + ' ' : ''}${i}</li>`).join('')}
+            </ul>
+        </div>`;
+    }).join('');
+    return `
+    <div class="slide" data-slide="8">
+        ${mesh([
+            'width:350px;height:350px;top:-70px;right:-60px;background:#c9a84c;opacity:0.08;',
+            'width:200px;height:200px;bottom:-40px;left:-30px;background:#8b6e2a;opacity:0.06;'
+        ])}
+        <div class="content">
+            ${stageHeader(d)}
+            <div class="grid grid-cols-3 gap-4">${kpiCards}</div>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 9 — ДОРОЖНАЯ КАРТА
+// ═══════════════════════════════════════════════════════════
+function renderS9(d) {
+    const grid = 'grid-template-columns:2fr 1.2fr 1fr 1.5fr';
+    const headerRow = `
+        <div class="reveal" style="display:grid;${grid};gap:1rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:0.8rem 1.2rem;align-items:center;">
+            ${d.columns.map(c => `<div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">${c}</div>`).join('')}
+        </div>`;
+    const dataRows = d.rows.map(r => {
+        const bg = r.highlighted
+            ? 'background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);'
+            : 'background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);';
+        return `
+        <div class="reveal" style="display:grid;${grid};gap:1rem;${bg}border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
+            <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">${r.stage}</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">${r.name}</span></div>
+            <div style="color:#d4c9b0;font-size:0.85rem;">${r.duration}</div>
+            <div style="color:#d4c9b0;font-size:0.85rem;">${r.format}</div>
+            <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">${r.price}</div>
+        </div>`;
+    }).join('');
+    const t = d.total;
+    const totalRow = `
+        <div class="reveal" style="display:grid;${grid};gap:1rem;background:linear-gradient(135deg,rgba(201,168,76,0.18),rgba(201,168,76,0.06));border:1px solid rgba(201,168,76,0.35);border-radius:10px;padding:0.85rem 1.2rem;align-items:center;">
+            <div style="color:#e8d5a0;font-weight:700;font-size:0.9rem;">${t.label}</div>
+            <div style="color:#d4c9b0;font-size:0.85rem;">${t.duration}</div>
+            <div style="color:#d4c9b0;font-size:0.85rem;">${t.format}</div>
+            <div style="color:#c9a84c;font-weight:700;font-size:1.05rem;" class="glow-pulse">${t.price}</div>
+        </div>`;
+    return `
+    <div class="slide" data-slide="9">
+        ${mesh([
+            'width:400px;height:400px;top:-80px;right:-70px;background:#c9a84c;opacity:0.09;',
+            'width:240px;height:240px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.07;'
+        ])}
+        <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+        <div class="content">
+            <div class="gold-line mb-3 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:1.5rem;">${d.title}</h2>
+            <div style="display:flex;flex-direction:column;gap:0.7rem;">
+                ${headerRow}${dataRows}${totalRow}
+            </div>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 10 — КОМАНДА
+// ═══════════════════════════════════════════════════════════
+function renderS10(d) {
+    const groups = d.groups.map(g => {
+        const bg = g.highlighted
+            ? 'background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);'
+            : 'background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.12);';
+        return `
+        <div class="reveal" style="${bg}border-radius:14px;padding:1.2rem;">
+            <p style="color:#c9a84c;font-weight:700;font-size:0.85rem;margin-bottom:0.8rem;text-transform:uppercase;letter-spacing:0.1em;">${g.icon} ${g.label}</p>
+            <ul style="color:#d4c9b0;font-size:0.83rem;line-height:1.9;list-style:none;padding:0;">${g.members.map(m => `<li>${m}</li>`).join('')}</ul>
+        </div>`;
+    }).join('');
+    return `
+    <div class="slide" data-slide="10">
+        ${mesh([
+            'width:360px;height:360px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;',
+            'width:200px;height:200px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;'
+        ])}
+        <div class="content">
+            <div class="gold-line mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:0.4rem;">${d.title}</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem;">${d.subtitle}</p>
+            <div class="grid grid-cols-3 gap-4">${groups}</div>
+            <div class="reveal" style="margin-top:1.2rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18);border-radius:12px;padding:1rem 1.5rem;text-align:center;">
+                <p style="color:#e8d5a0;font-size:0.9rem;">${d.keyLink}</p>
+            </div>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 11 — РЕЗУЛЬТАТЫ
+// ═══════════════════════════════════════════════════════════
+function renderS11(d) {
+    const statsHtml = d.stats.map(s => {
+        const bg = s.highlighted
+            ? 'background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);'
+            : 'background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);';
+        const valClass = s.isPulse ? 'glow-pulse' : 'stat-glow';
+        const valStyle = s.isPulse
+            ? 'font-size:1rem;font-weight:700;color:#c9a84c;margin-bottom:0.3rem;'
+            : 'font-size:1.6rem;font-weight:900;color:#c9a84c;margin-bottom:0.3rem;';
+        const dataCount = s.countTo ? `data-count="${s.countTo}"` : '';
+        const labelHtml = s.label.replace('\n', '<br>');
+        return `
+        <div class="reveal" style="${bg}border-radius:14px;padding:1.2rem 0.8rem;text-align:center;">
+            <div style="font-size:2.2rem;margin-bottom:0.5rem;">${s.icon}</div>
+            <div style="${valStyle}" class="${valClass}" ${dataCount}>${s.value}</div>
+            <div style="font-size:0.72rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">${labelHtml}</div>
+        </div>`;
+    }).join('');
+    return `
+    <div class="slide" data-slide="11">
+        ${mesh([
+            'width:420px;height:420px;top:-90px;right:-70px;background:#c9a84c;opacity:0.11;',
+            'width:260px;height:260px;bottom:-60px;left:-50px;background:#8b6e2a;opacity:0.08;'
+        ])}
+        <div class="content text-center">
+            <div class="gold-line mx-auto mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:#f5f0e8;margin-bottom:0.4rem;">${d.title}</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.8rem;">${d.subtitle}</p>
+            <div class="grid grid-cols-4 gap-4">${statsHtml}</div>
+            <div class="reveal" style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:1.2rem 2rem;">
+                <p style="color:#e8d5a0;font-size:1rem;font-weight:600;">${d.closing}</p>
+            </div>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  СЛАЙД 12 — CTA
+// ═══════════════════════════════════════════════════════════
+function renderS12(d) {
+    const stepsHtml = d.steps.map(s => {
+        const bg = s.highlighted
+            ? 'background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);'
+            : 'background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);';
+        return `
+        <div style="${bg}border-radius:14px;padding:1.2rem;">
+            <div style="font-size:1.8rem;margin-bottom:0.5rem;">${s.icon}</div>
+            <p style="color:#c9a84c;font-weight:700;font-size:0.88rem;margin-bottom:0.3rem;">${s.label}</p>
+            <p style="color:#d4c9b0;font-size:0.82rem;line-height:1.5;">${s.text}</p>
+        </div>`;
+    }).join('');
+    return `
+    <div class="slide" data-slide="12">
+        ${mesh([
+            'width:500px;height:500px;top:-110px;right:-90px;background:#c9a84c;opacity:0.14;',
+            'width:320px;height:320px;bottom:-70px;left:-70px;background:#8b6e2a;opacity:0.1;',
+            'width:200px;height:200px;top:40%;left:20%;background:#e8d5a0;opacity:0.07;'
+        ])}
+        <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+        <div class="content text-center">
+            <div class="gold-line mx-auto mb-4 reveal"></div>
+            <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.8rem);font-weight:700;background:linear-gradient(135deg,#c9a84c,#e8d5a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem;">${d.title}</h2>
+            <p class="reveal" style="color:#8a8070;font-size:0.88rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:2rem;">${d.subtitle}</p>
+            <div class="grid grid-cols-3 gap-4 reveal" style="margin-bottom:1.8rem;">${stepsHtml}</div>
+            <div class="reveal" style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:1.2rem 2rem;display:inline-block;">
+                <p style="color:#e8d5a0;font-size:0.95rem;">${d.contact}</p>
+            </div>
+        </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+//  РЕНДЕР ВСЕХ СЛАЙДОВ
+// ═══════════════════════════════════════════════════════════
+const C = CONTENT;
+document.getElementById('deck').innerHTML = [
+    renderS1(C.s1),
+    renderS2(C.s2),
+    renderS3(C.s3),
+    renderS4(C.s4),
+    renderS5(C.s5),
+    renderS6(C.s6),
+    renderS7(C.s7),
+    renderS8(C.s8),
+    renderS9(C.s9),
+    renderS10(C.s10),
+    renderS11(C.s11),
+    renderS12(C.s12)
+].join('');
+
+document.title = C.meta.pageTitle;
+
+// ═══════════════════════════════════════════════════════════
+//  НАВИГАЦИЯ
+// ═══════════════════════════════════════════════════════════
+let current = 1;
+const total = document.querySelectorAll('.slide').length;
+const dotsContainer = document.getElementById('dots');
+const counter = document.getElementById('counter');
+for (let i = 1; i <= total; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 1 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+}
+function goToSlide(n) {
+    const prev = document.querySelector('.slide.active');
+    const next = document.querySelector(`.slide[data-slide="${n}"]`);
+    if (prev) prev.classList.remove('active');
+    if (next) { next.classList.add('active'); animateSlide(next); }
+    current = n; updateNav();
+}
+function changeSlide(dir) { let next = current + dir; if (next < 1) next = total; if (next > total) next = 1; goToSlide(next); }
+function updateNav() {
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i + 1 === current));
+    counter.textContent = current + ' / ' + total;
+}
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+});
+let touchStartX = 0;
+document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', (e) => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1); });
+
+// ═══════════════════════════════════════════════════════════
+//  АНИМАЦИИ
+// ═══════════════════════════════════════════════════════════
+function animateSlide(slide) {
+    slide.querySelectorAll('.reveal').forEach((el, i) => {
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.offsetHeight;
+        const delay = i * 0.08;
+        el.style.transition = `opacity 0.35s ease ${delay}s, transform 0.35s ease ${delay}s`;
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0px)';
     });
-    let touchStartX = 0;
-    document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
-    document.addEventListener('touchend', (e) => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1); });
+    animateSlideEffects(slide);
+}
 
-    function animateSlide(slide) {
-        slide.querySelectorAll('.reveal').forEach((el, i) => {
-            el.style.transition = 'none';
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.offsetHeight;
-            const delay = i * 0.08;
-            el.style.transition = `opacity 0.35s ease ${delay}s, transform 0.35s ease ${delay}s`;
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0px)';
-        });
-        animateSlideEffects(slide);
-    }
-
-    function animateSlideEffects(slide) {
-        slide.querySelectorAll('[data-count]:not(.counted)').forEach(el => {
-            el.classList.add('counted');
-            const target = parseInt(el.dataset.count);
-            const suffix = el.dataset.suffix || '', prefix = el.dataset.prefix || '';
-            let cur = 0; const step = target / 40;
-            const timer = setInterval(() => {
-                cur += step;
-                if (cur >= target) { cur = target; clearInterval(timer); }
-                el.textContent = prefix + Math.round(cur).toLocaleString() + suffix;
-            }, 30);
-        });
-        slide.querySelectorAll('.bar-fill:not(.fill-init)').forEach((bar, i) => {
-            bar.classList.add('fill-init');
-            bar.style.width = '0%';
-            bar.style.transition = `width 0.6s ease ${i * 0.1}s`;
-            bar.offsetHeight;
-            bar.style.width = bar.dataset.width + '%';
-        });
-    }
-
-    document.addEventListener('mousemove', (e) => {
-        const spotlight = document.querySelector('.mouse-spotlight');
-        if (spotlight) {
-            spotlight.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(201,168,76,0.06), transparent 40%)`;
-        }
+function animateSlideEffects(slide) {
+    slide.querySelectorAll('[data-count]:not(.counted)').forEach(el => {
+        el.classList.add('counted');
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '', prefix = el.dataset.prefix || '';
+        let cur = 0; const step = target / 40;
+        const timer = setInterval(() => {
+            cur += step;
+            if (cur >= target) { cur = target; clearInterval(timer); }
+            el.textContent = prefix + Math.round(cur).toLocaleString() + suffix;
+        }, 30);
     });
+    slide.querySelectorAll('.bar-fill:not(.fill-init)').forEach((bar, i) => {
+        bar.classList.add('fill-init');
+        bar.style.width = '0%';
+        bar.style.transition = `width 0.6s ease ${i * 0.1}s`;
+        bar.offsetHeight;
+        bar.style.width = bar.dataset.width + '%';
+    });
+}
 
-    window.initParticles = function(canvas, options) {
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight;
-        const interactive = options.interactive !== false;
-        const count = options.count || (interactive ? 55 : 18);
-        let mx = -1000, my = -1000;
-        const particles = Array.from({ length: count }, () => ({
-            x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-            size: Math.random() * 2.2 + 0.6, alpha: Math.random() * 0.3 + 0.08
-        }));
-        if (interactive) {
-            canvas.addEventListener('mousemove', (e) => { const rect = canvas.getBoundingClientRect(); mx = e.clientX - rect.left; my = e.clientY - rect.top; });
-            canvas.addEventListener('mouseleave', () => { mx = -1000; my = -1000; });
-        }
-        (function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                if (interactive) {
-                    const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) { const force = (120 - dist) / 120 * 2; p.vx += (dx / dist) * force * 0.1; p.vy += (dy / dist) * force * 0.1; }
-                }
-                p.vx *= 0.98; p.vy *= 0.98; p.x += p.vx; p.y += p.vy;
-                if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
-                if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(201,168,76,${p.alpha})`; ctx.fill();
-            });
-            requestAnimationFrame(animate);
-        })();
-    };
-    document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { interactive: true, count: 55 }));
-    document.querySelectorAll('.particle-canvas-ambient').forEach(c => window.initParticles(c, { interactive: false, count: 18 }));
+document.addEventListener('mousemove', (e) => {
+    const spotlight = document.querySelector('.mouse-spotlight');
+    if (spotlight) {
+        spotlight.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(201,168,76,0.06), transparent 40%)`;
+    }
+});
 
-    try { animateSlide(document.querySelector('.slide.active')); } catch(e) { console.warn(e); }
+window.initParticles = function(canvas, options) {
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight;
+    const interactive = options.interactive !== false;
+    const count = options.count || (interactive ? 55 : 18);
+    let mx = -1000, my = -1000;
+    const particles = Array.from({ length: count }, () => ({
+        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 2.2 + 0.6, alpha: Math.random() * 0.3 + 0.08
+    }));
+    if (interactive) {
+        canvas.addEventListener('mousemove', (e) => { const rect = canvas.getBoundingClientRect(); mx = e.clientX - rect.left; my = e.clientY - rect.top; });
+        canvas.addEventListener('mouseleave', () => { mx = -1000; my = -1000; });
+    }
+    (function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            if (interactive) {
+                const dx = p.x - mx, dy = p.y - my, dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) { const force = (120 - dist) / 120 * 2; p.vx += (dx / dist) * force * 0.1; p.vy += (dy / dist) * force * 0.1; }
+            }
+            p.vx *= 0.98; p.vy *= 0.98; p.x += p.vx; p.y += p.vy;
+            if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+            if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(201,168,76,${p.alpha})`; ctx.fill();
+        });
+        requestAnimationFrame(animate);
+    })();
+};
+document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, { interactive: true, count: 55 }));
+document.querySelectorAll('.particle-canvas-ambient').forEach(c => window.initParticles(c, { interactive: false, count: 18 }));
+
+try { animateSlide(document.querySelector('.slide.active')); } catch(e) { console.warn(e); }
 </script>
 </body>
 </html>
