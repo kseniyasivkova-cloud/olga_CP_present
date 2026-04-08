@@ -271,6 +271,23 @@ function renderS3(d) {
 //  СЛАЙД 5 — СТРАТЕГИЯ
 // ═══════════════════════════════════════════════════════════
 function renderS4(d) {
+    const strategyCards = d.strategies.map(s => `
+        <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;display:flex;flex-direction:column;gap:0.6rem;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;margin-bottom:0.2rem;">
+                <div style="display:flex;align-items:center;gap:0.6rem;">
+                    <span style="font-size:1.4rem;flex-shrink:0;">${s.icon}</span>
+                    <div>
+                        <div style="font-size:0.65rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.15em;">Стратегия ${s.num}</div>
+                        <p style="color:#e8d5a0;font-weight:700;font-size:0.88rem;line-height:1.2;">${s.title}</p>
+                    </div>
+                </div>
+                <div style="text-align:right;flex-shrink:0;">
+                    <div style="font-size:0.62rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">стоимость</div>
+                    <div style="font-size:1.15rem;font-weight:700;color:#c9a84c;" class="glow-pulse">${s.price}</div>
+                </div>
+            </div>
+            <ul style="color:#d4c9b0;font-size:0.82rem;line-height:1.8;list-style:none;padding:0;">${li(s.items)}</ul>
+        </div>`).join('');
     return `
     <div class="slide" data-slide="8">
         ${mesh([
@@ -279,17 +296,11 @@ function renderS4(d) {
         ])}
         <div class="content">
             ${stageHeader(d)}
-            <div class="grid grid-cols-2 gap-4">
-                <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;">
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">${d.includesTitle}</p>
-                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.8;list-style:none;padding:0;">${li(d.includes)}</ul>
-                </div>
-                <div class="reveal" style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:1.3rem;">
-                    <p style="color:#c9a84c;font-weight:700;font-size:0.9rem;margin-bottom:0.8rem;">${d.benefitsTitle}</p>
-                    <ul style="color:#d4c9b0;font-size:0.85rem;line-height:1.8;list-style:none;padding:0;">${li(d.benefits, '')}</ul>
-                </div>
+            <div class="grid grid-cols-2 gap-4">${strategyCards}</div>
+            <div class="reveal" style="margin-top:1rem;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border:1px solid rgba(201,168,76,0.35);border-radius:10px;padding:0.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;">
+                <span style="color:#d4c9b0;font-size:0.88rem;font-weight:600;">${d.totalLabel}</span>
+                <span style="color:#c9a84c;font-size:1.3rem;font-weight:700;" class="glow-pulse">${d.totalPrice}</span>
             </div>
-            ${resources(d.resources)}
         </div>
     </div>`;
 }
