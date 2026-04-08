@@ -304,7 +304,7 @@ const CONTENT = {
     stagePeriod: "Этап — Сопровождение",
     title: "Контент-конвейер и сопровождение",
     priceLabel: "Сопровождение",
-    priceValue: "от 100 000 до 500 000 ₽/мес",
+    priceValue: "от 150 000 ₽/мес",
     priceSuffix: "зависит от форматов и состава команды",
     productionTitle: "🎬 Производство",
     production: [
