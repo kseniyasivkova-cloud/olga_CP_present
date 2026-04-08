@@ -102,7 +102,7 @@
     <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
     <div class="slide-dots" id="dots"></div>
     <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
-    <span class="slide-counter" id="counter">1 / 17</span>
+    <span class="slide-counter" id="counter">1 / 16</span>
 </div>
 
 <script src="content.js"></script>
@@ -361,7 +361,7 @@ function renderS6(d) {
 function renderS7(d) {
     const teamGrid = d.team.map(t => `<span style="color:#d4c9b0;font-size:0.82rem;">${t.icon} ${t.role}</span>`).join('');
     return `
-    <div class="slide" data-slide="11">
+    <div class="slide" data-slide="10">
         ${mesh([
             'width:370px;height:370px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;',
             'width:220px;height:220px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;'
@@ -405,7 +405,7 @@ function renderS8(d) {
         </div>`;
     }).join('');
     return `
-    <div class="slide" data-slide="12">
+    <div class="slide" data-slide="11">
         ${mesh([
             'width:350px;height:350px;top:-70px;right:-60px;background:#c9a84c;opacity:0.08;',
             'width:200px;height:200px;bottom:-40px;left:-30px;background:#8b6e2a;opacity:0.06;'
@@ -447,7 +447,7 @@ function renderS9(d) {
             <div style="color:#c9a84c;font-weight:700;font-size:1.05rem;" class="glow-pulse">${t.price}</div>
         </div>`;
     return `
-    <div class="slide" data-slide="13">
+    <div class="slide" data-slide="12">
         ${mesh([
             'width:400px;height:400px;top:-80px;right:-70px;background:#c9a84c;opacity:0.09;',
             'width:240px;height:240px;bottom:-50px;left:-40px;background:#8b6e2a;opacity:0.07;'
@@ -473,7 +473,7 @@ function renderExclusions(d) {
             <span style="color:#d4c9b0;font-size:0.9rem;line-height:1.5;">${item.text}</span>
         </div>`).join('');
     return `
-    <div class="slide" data-slide="14">
+    <div class="slide" data-slide="13">
         ${mesh([
             'width:350px;height:350px;top:-70px;right:-60px;background:#8b6e2a;opacity:0.08;',
             'width:200px;height:200px;bottom:-40px;left:-30px;background:#c9a84c;opacity:0.06;'
@@ -502,7 +502,7 @@ function renderS10(d) {
         </div>`;
     }).join('');
     return `
-    <div class="slide" data-slide="15">
+    <div class="slide" data-slide="14">
         ${mesh([
             'width:360px;height:360px;top:-70px;left:-50px;background:#c9a84c;opacity:0.08;',
             'width:200px;height:200px;bottom:-40px;right:-30px;background:#8b6e2a;opacity:0.06;'
@@ -541,7 +541,7 @@ function renderS11(d) {
         </div>`;
     }).join('');
     return `
-    <div class="slide" data-slide="16">
+    <div class="slide" data-slide="15">
         ${mesh([
             'width:420px;height:420px;top:-90px;right:-70px;background:#c9a84c;opacity:0.11;',
             'width:260px;height:260px;bottom:-60px;left:-50px;background:#8b6e2a;opacity:0.08;'
@@ -574,7 +574,7 @@ function renderS12(d) {
         </div>`;
     }).join('');
     return `
-    <div class="slide" data-slide="17">
+    <div class="slide" data-slide="16">
         ${mesh([
             'width:500px;height:500px;top:-110px;right:-90px;background:#c9a84c;opacity:0.14;',
             'width:320px;height:320px;bottom:-70px;left:-70px;background:#8b6e2a;opacity:0.1;',
