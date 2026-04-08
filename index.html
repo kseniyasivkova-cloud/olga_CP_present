@@ -116,12 +116,24 @@ function mesh(configs) {
 }
 
 function stageHeader(d) {
+    const priceLabel  = d.priceLabel  || 'Стоимость';
+    const priceValue  = d.price       || d.priceValue || '';
+    const priceSuffix = d.priceSuffix || `${d.format} · ${d.duration}`;
+    const priceStyle  = d.price
+        ? 'font-size:1.6rem;font-weight:700;color:#c9a84c;'
+        : 'font-size:1.1rem;font-weight:700;color:#c9a84c;';
+    const priceClass  = d.price ? 'class="glow-pulse"' : '';
     return `
     <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;" class="reveal">
         <div class="stage-badge">${d.stageNum}</div>
         <div>
             <div style="font-size:0.75rem;color:#8a8070;letter-spacing:0.2em;text-transform:uppercase;">${d.stagePeriod}</div>
             <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;color:#f5f0e8;line-height:1.1;">${d.title}</h2>
+        </div>
+        <div class="price-tag ml-auto" style="text-align:center;flex-shrink:0;">
+            <div style="font-size:0.7rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">${priceLabel}</div>
+            <div style="${priceStyle}" ${priceClass}>${priceValue}</div>
+            <div style="font-size:0.7rem;color:#8a8070;">${priceSuffix}</div>
         </div>
     </div>`;
 }
@@ -261,11 +273,17 @@ function renderS3(d) {
 function renderS4(d) {
     const strategyCards = d.strategies.map(s => `
         <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1.3rem;display:flex;flex-direction:column;gap:0.6rem;">
-            <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.2rem;">
-                <span style="font-size:1.4rem;flex-shrink:0;">${s.icon}</span>
-                <div>
-                    <div style="font-size:0.65rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.15em;">Стратегия ${s.num}</div>
-                    <p style="color:#e8d5a0;font-weight:700;font-size:0.88rem;line-height:1.2;">${s.title}</p>
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;margin-bottom:0.2rem;">
+                <div style="display:flex;align-items:center;gap:0.6rem;">
+                    <span style="font-size:1.4rem;flex-shrink:0;">${s.icon}</span>
+                    <div>
+                        <div style="font-size:0.65rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.15em;">Стратегия ${s.num}</div>
+                        <p style="color:#e8d5a0;font-weight:700;font-size:0.88rem;line-height:1.2;">${s.title}</p>
+                    </div>
+                </div>
+                <div style="text-align:right;flex-shrink:0;">
+                    <div style="font-size:0.62rem;color:#8a8070;text-transform:uppercase;letter-spacing:0.1em;">стоимость</div>
+                    <div style="font-size:1.15rem;font-weight:700;color:#c9a84c;" class="glow-pulse">${s.price}</div>
                 </div>
             </div>
             <ul style="color:#d4c9b0;font-size:0.82rem;line-height:1.8;list-style:none;padding:0;">${li(s.items)}</ul>
@@ -279,6 +297,10 @@ function renderS4(d) {
         <div class="content">
             ${stageHeader(d)}
             <div class="grid grid-cols-2 gap-4">${strategyCards}</div>
+            <div class="reveal" style="margin-top:1rem;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border:1px solid rgba(201,168,76,0.35);border-radius:10px;padding:0.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;">
+                <span style="color:#d4c9b0;font-size:0.88rem;font-weight:600;">${d.totalLabel}</span>
+                <span style="color:#c9a84c;font-size:1.3rem;font-weight:700;" class="glow-pulse">${d.totalPrice}</span>
+            </div>
         </div>
     </div>`;
 }
@@ -411,7 +433,7 @@ function renderS8(d) {
 //  СЛАЙД 10 — ДОРОЖНАЯ КАРТА
 // ═══════════════════════════════════════════════════════════
 function renderS9(d) {
-    const grid = 'grid-template-columns:2fr 1.2fr 1fr';
+    const grid = 'grid-template-columns:2fr 1.2fr 1fr 1.5fr';
     const headerRow = `
         <div class="reveal" style="display:grid;${grid};gap:1rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:0.8rem 1.2rem;align-items:center;">
             ${d.columns.map(c => `<div style="color:#8a8070;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;">${c}</div>`).join('')}
@@ -425,6 +447,7 @@ function renderS9(d) {
             <div><span class="stage-badge" style="width:28px;height:28px;font-size:0.75rem;margin-right:0.6rem;">${r.stage}</span><span style="color:#f5f0e8;font-size:0.88rem;font-weight:600;">${r.name}</span></div>
             <div style="color:#d4c9b0;font-size:0.85rem;">${r.duration}</div>
             <div style="color:#d4c9b0;font-size:0.85rem;">${r.format}</div>
+            <div style="color:#c9a84c;font-weight:700;font-size:0.95rem;">${r.price}</div>
         </div>`;
     }).join('');
     const totalRow = d.total ? `
@@ -432,6 +455,7 @@ function renderS9(d) {
             <div style="color:#e8d5a0;font-weight:700;font-size:0.9rem;">${d.total.label}</div>
             <div style="color:#d4c9b0;font-size:0.85rem;">${d.total.duration}</div>
             <div style="color:#d4c9b0;font-size:0.85rem;">${d.total.format}</div>
+            <div style="color:#c9a84c;font-weight:700;font-size:1.05rem;" class="glow-pulse">${d.total.price}</div>
         </div>` : '';
     return `
     <div class="slide" data-slide="13">
